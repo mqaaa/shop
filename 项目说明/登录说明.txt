@@ -1,0 +1,18 @@
+友情提示：
+	本项目在谷歌浏览器可完美运行,在其他浏览器可能存在兼容性问题，暂未优化；
+	首次进入项目页面会自行进行网站安装，数据库导入
+
+数据库名称：pjceshi(默认) 在首次打开可自行设置。
+
+前台登录账户（可自行注册）
+
+ 地址：http://localhost/project/
+ 账户：admin	
+ 密码：admin
+
+后台:
+
+ 地址: http://localhost/project/admin	
+ 账户：admin
+ 密码: admin
+		
