@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+    
+    select{
+        width:200px;
+        height:40px;
+        border:1px solid #ccc;
+        margin-top:10px;
+    }
+</style>
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">表单</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span>添加栏目</span></div>
+    <form action="./index.php?m=type&a=do_add" method="post">
+        <ul class="forminfo" >
+       <!-- PHP从数据库遍历出栏目添加显示 -->
+            <li><label>栏目名</label>
+                
+                <?php 
+                   if(isset($res) && count($res)>0){
+                        foreach($res as $k=>$v){
+                            //父亲的路径加父亲的ID
+                          if($v['id'] == $_GET['id']){
+                                  $pname = $v['name'];
+                                  $vale = $v['path'].$v['id'];  
+                          }
+                            
+                        }
+                   }
+                    
+                ?>    
+               
+               <select name="type" id="level" style="position:relative;top:-10px;" >
+                    <option value="<?php echo $vale; ?>"  selected>&nbsp;&nbsp;<?php echo $pname; ?></option>
+                </select>  
+            </li>
+           <li><label>子名称</label><input name="name" type="text" class="dfinput" value="" required/><i>多个关键字用,隔开</i></li> 
+            <input name="sid" type="hidden" class="dfinput" value="<?php echo $_GET['id'] ?>" />
+           <!--  <li><label>文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea></li> -->
+            <li><label>&nbsp;</label><input  type="submit" class="btn" value="确认添加"/></li>
+        </ul>
+    </form>
+    
+    
+    
+    </div>
+
+
+</body>
+
+</html>

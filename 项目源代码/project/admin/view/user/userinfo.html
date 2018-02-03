@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>个人中心</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	
+	<link rel="stylesheet" href="./include/css/userinfo.css">
+	
+</head>
+<body>
+	
+	<div id="zhuti">
+		<div class="zhuti_body">
+			
+			<div class="right">
+					<div class="info_head">
+						<a href="">基本信息 > <?php echo $title; ?></a>&nbsp;
+						<!-- <a href="">头像照片</a>&nbsp;
+						<a href="">更多个人信息</a> -->
+					</div>
+					<div class="user_set">
+					
+					<form action="./index.php?m=user&a=<?php  echo $method; ?>" method="post" enctype="multipart/form-data">
+						<?php 
+						echo $hidden; ?>
+						<div class="info_set">
+							<div class="infolist">
+								用户名：<b><?php echo $username; ?></b>
+								<input type="hidden" name="username" value="<?php echo $username; ?>" >
+							</div>
+							<div class="infolist">
+								真&nbsp;名：<input type="text" name="name" required value="<?php echo $res[0]['name']; ?>"> 真实姓名
+							</div>
+							<div class="infolist">
+								年&nbsp;龄：<input type="text" pattern="^\d{1,3}$" name="age" required value="<?php echo $res[0]['age']; ?>"> 输入年龄
+							</div>
+							<div class="infolist">
+							<?php 
+								$nan = $nv = $bao = '';
+								if($res){
+
+									foreach($res as $k=>$v){
+										switch($v['sex']){
+											case 0 :
+												$nv = 'checked';
+											break;	
+											case 1 :
+												$nan = 'checked';
+											break;	
+											case 2 :
+												$bao = 'checked';
+											break;		
+										}
+									}
+								}
+								
+							?>
+								性&nbsp;别：&nbsp;<input type="radio" name="sex"
+								 value="1" <?php echo $nan; ?> >男&nbsp;
+									  <input type="radio" checked name="sex" value="0" <?php echo $nv; ?> >女&nbsp;
+									  <input type="radio" name="sex" value="2" <?php echo $bao; ?>>保密
+							</div>
+							<div class="infolist">
+								电&nbsp;话：<input type="text" parrent="^\d{5,11}$" name="phone" value="<?php echo $res[0]['phone'] ?>" required> 输入5-11位电话号码
+							</div>
+							<!-- 需要单独拼接 转化为时间戳存储 -->
+							<div class="infolist">
+							<?php
+								if(isset($res)){
+									$birth = $res[0]['birthday'];
+									$str = date('Y-m-d',$birth);
+									$bir = explode('-',$str);
+								}
+								
+								
+							?>
+								生&nbsp;日：<select name="year" required>
+										<option value="xz">请选择</option>
+									<?php
+
+										for($i = 1970;$i < date('Y',time());$i++){
+											if(isset($bir[0]) && $i == $bir[0]){
+												echo '<option value="'.$i.'" selected>'.$i.'</option>';
+											}else{
+												echo '<option value="'.$i.'">'.$i.'</option>';
+											}
+											
+										}
+									?>
+									  </select> 年
+									  <select name="month" required>
+										<option value="xz">请选择</option>
+									<?php	
+										for($i = 1;$i <= 12;$i++){
+											if(isset($bir[1]) &&  $i == $bir[1]){
+
+												echo '<option value="'.$i.'" selected>'.$i.'</option>';
+											}else{
+												echo '<option value="'.$i.'" >'.$i.'</option>';
+											}
+										}
+									?>	
+									  </select> 月
+									  <select name="day" required>
+										<option value="xz">请选择</option>
+									<?php	
+										for($i = 1;$i <= 31;$i++){
+											if(isset($bir[2]) && $i == $bir[2]){
+												echo '<option value="'.$i.'" selected>'.$i.'</option>';
+											}else{
+												echo '<option value="'.$i.'">'.$i.'</option>';
+											}
+											
+										}
+									?>	
+									  </select> 日
+							</div>
+							<div class="infolist">
+							<?php 
+									
+									$dan = $yi = $li = '';
+									if(isset($res[0]['hunfou'])){
+										switch($res[0]['hunfou']){
+											case 0 :
+												$dan = 'checked';
+											break;	
+											case 1 :
+												$yi = 'checked';
+											break;	
+											case 2 :
+												$li = 'checked';
+											break;	
+														
+										}
+									}
+							?>
+								婚&nbsp;否：&nbsp;<input type="radio" checked name="hunfou" value="1" <?php 
+									  	echo $dan;
+									  ?>>单身&nbsp;
+									  <input type="radio" name="hunfou" 
+									  value="0" <?php 
+									  	echo $yi;
+									  ?>>已婚&nbsp;
+									  <input type="radio" name="hunfou" value="2" <?php 
+									  	echo $li;
+									  ?> >离异
+							</div>
+							<!-- <div class="infolist">
+								邮&nbsp;箱：<input type="email" name="email" required value="">
+							</div> -->
+							
+							
+							<div class="hobby1">
+								兴趣爱好：请选择您感兴趣的分类，给您最精准的推荐
+							</div>
+							<div class="hobby">
+					<?php
+						$xuan0 = $xuan1 = $xuan2 = $xuan3 = $xuan4 = '';
+						if(isset($res[0]['hobby'])){
+							$aihao = explode(',',$res[0]['hobby']);
+							$dan = $yi = $wei = '';
+							$arr = array(0,1,2,3,4);
+								foreach($aihao as $v){
+									if($v==0){
+										$xuan0 = 'checked';
+									}elseif($v==1){
+										$xuan1 = 'checked';
+									}elseif($v==2){
+										$xuan2 = 'checked';
+									}elseif($v==3){
+										$xuan3 = 'checked';
+									}elseif($v==4){
+										$xuan4 = 'checked';
+									}					
+								}
+							
+							
+						}	
+					?>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="shu" value="0" <?php echo $xuan0;?> ><label for="shu">图书/音像/数字商品</label>
+								</div>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="sport" value="1" <?php echo $xuan1;?> ><label for="sport">运动健康</label>
+								</div>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="shouji" value="2" <?php echo $xuan2;?> ><label for="shouji">手机/数码</label>
+								</div>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="diannao" value="3" <?php echo $xuan3;?> ><label for="diannao">电脑/办公</label>
+								</div>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="zhubao" value="4" <?php echo $xuan4;?> ><label for="zhubao">服饰内衣/珠宝首饰</label>
+								</div>
+								
+								
+							</div>
+							<div class="infolist">
+								地&nbsp;址：<input type="text" name="address" required value="<?php echo $res[0]['address'];?>"> 请输入地址，以便串门
+							</div>
+							<div class="infolist"><input type="submit" value="<?php echo $submit; ?>"></div>
+
+						</div>
+					
+						<div class="touxiang">
+							<div class="touimg">
+								<img src="./uploadimg/user/<?php echo $res[0]['pic'];?>" alt="" width="104px" height="104px">
+							</div>
+							<div class="msg">
+								<p>
+									用户名:<b><?php echo $username; ?></b>	
+								</p>
+						<?php		
+								echo '<input type="hidden" name="ji" value="'.$_GET['ji'].'">';
+								$lvarr = array('普通','VIP','禁用','超级管理员');
+								if(isset($_GET['ji']) ){
+									 $ji = $lvarr[$_GET['ji']];
+								}elseif($_POST['ji']){
+									 $ji = $lvarr[$_POST['ji']];
+								}else{
+									$ji = '没有级别';
+								}
+
+						?>	
+								<p>
+									等　级:<span><?php echo $ji; ?></span>	
+								</p>
+
+								<p>
+									会员类型：个人用户
+								</p>
+							</div>
+						</div>
+						<input type="hidden" name="img" value="<?php 
+							if($res){
+								echo $res[0]['pic'];
+							}
+							
+						 ?>">
+						<div class="infolist" style="float:left;margin-top:20px;">修改头像：<input type="file" name="pic" <?php echo $picrequired; ?>></div>
+
+						
+						</form>	
+					</div>
+			</div>
+		</div>		
+	</div>
+	
+</body>
+</html>

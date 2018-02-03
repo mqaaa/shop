@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商品列表页</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	<link rel="stylesheet" href="./include/css/shoplist.css">
+	<link rel="stylesheet" href="./include/css/footer.css">
+</head>
+<body>
+	<header id="header"> 
+	<div class="head">
+		<!-- <div class="logo_big"><img src="./include/image/index/logo_big.png" alt=""></div> -->
+		<div class="head_top">	
+			<div class="sign">
+				<div class="beijing"><a href="">北京</a></div>
+				<?php
+
+					//判断是否登录	
+					if(isset($_SESSION['god']) && $_SESSION['god']['islogin']==true){
+						$username = '亲爱的'.$_SESSION['god']['level'];
+						$dengji = $_SESSION['god']['name'];
+						$a = 'info';
+						$sign = 'info';
+					}else{
+						$username = '你好,请登录';
+						$a = 'login';
+						$dengji = '免费注册';
+						$sign = 'sign';
+					}
+
+				?>
+				<div class="nihao"><a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $username; ?></div>
+			</div>
+			<div class="top_list">
+				<ul>
+					<li ><a href="index.php?m=user&a=<?php echo $sign; ?>" style="color:#f10215"><?php echo $dengji; ?></a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=order&a=show">我的订单</a></li>
+					<li class="top_list_fuhao"><span>|</span></li> 
+					<li class="top_list_word"><a href="index.php?m=info&a=show">我的京东</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="#">京东会员</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="#">企业采购</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li class="top_list_word"><a href="#">客户服务</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li class="top_list_word"><a href="#">网站导航</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=user&a=out">退出登录</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="search_nav">
+		<div class="top_search">
+			<a class="logo_shop" href="index.php">
+				<img src="./include/image/shopdescription/logo_shop.png" alt="">
+			</a>
+			<div class="top_search02">
+				<div class="top_search_center">
+
+				<form action="index.php">
+					<div class="input">
+						<input type="hidden" name="m" value="shop">
+						<input type="hidden" name="a" value="show">
+						<input type='text' name="search" class='input1' value="<?php echo $sousuo; ?>" placeholder="请输入商品">
+						<input type='submit'  value="搜索" class='input2'>			
+					</div>			
+					
+				</form>
+
+
+					
+					<div class="top_search_word">
+						
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+						
+					</div>
+				
+				</div>
+				<div class="top_search_right">
+					<div class="carbody">
+							<i class="icon_car"></i>
+							<a class="shopcar" href="index.php?m=car&a=show">
+								我的购物车
+								<div class="shopnum">0</div>
+								>
+							</a>
+							
+						</div>
+				</div>
+			</div>
+		</div>
+		<div class="top_nav">
+			<div class="top_nav_list">
+				<a href="index.php?m=shop&a=show" class="quanbushangpin">
+					全部商品分类    &nbsp&nbsp&nbsp&nbsp>
+				</a>
+				<ul>
+<?php
+				//这里显示顶级分类
+				if(isset($types)){
+				$num = 0;
+					foreach($types as $k=>$v){
+						
+						if($v['pid']==0){
+						if($num>=8){
+							break;
+						}
+							echo "<li><a href='./index.php?m=shop&a=show&path={$v['name']}+{$v['id']}&id={$v['id']}'>{$v['name']}</a>
+										<ul class='zilei' >";
+								
+								foreach($pids as $key=>$val){
+									//遍历出子类
+									if($val['pid'] == $v['id']){
+										
+										echo "<li >
+<a href='./index.php?m=shop&a=show&path={$v['name']}-{$v['id']},{$val['name']}-{$val['id']}&id={$val['id']}'> {$val['name']} </a>";
+												echo "<ul>";
+												foreach($pids as $zi){
+													if($zi['pid']==$val['id']){
+														echo "<li>
+<a href='./index.php?m=shop&a=show&path={$v['name']}-{$v['id']},{$val['name']}-{$val['id']},{$zi['name']}-{$zi['id']}&id={$zi['id']}'>{$zi['name']}</a></li>";
+													}
+												}
+												echo "</ul>";	
+										echo "</li>";
+										
+									}
+								}
+
+							echo "	</ul>
+								  </li>";
+						$num++;
+						}
+						
+					}
+				}
+				
+
+			?>
+
+					<!-- <li><a href="">秒杀</a></li>
+					<li><a href="">优惠券</a></li>
+					<li><a href="">闪购</a></li>
+					<li><a href="">拍卖</a></li>
+					<li class="top_nav_fuhao"><span>|</span></li>
+					<li><a href="">服装城</a></li>
+					<li><a href="">京东超市</a></li>
+					<li><a href="">生鲜</a></li>
+					<li><a href="">全球购</a></li>
+					<li class="top_nav_fuhao"><span>|</span></li>
+					<li><a href="">京东金融</a></li> -->
+				</ul>
+
+			</div>
+		</div>
+	</div>	
+	</header>
+	<div id="main">
+		<div class="main-body">
+		<?php 
+			//获取到传过来分类的路径
+
+		 ?>
+			<div class="result">全部结果 > <?php echo $pathstr; ?></div>
+			<!-- <div class="shop-search">
+				<div class="pinpai ">
+					<div class="pinpai01">电脑：</div>
+					<ul>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/lianxiang.jpg"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+						<li><a href=""><img src="./include/image/shoplist/shangbiao.png"></a></li>
+
+					</ul>
+				</div>
+				<div class="sou">
+					<div class="zhengji">电脑整机：</div>
+					<ul>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+					</ul>
+				</div>
+				<div class="sou">
+					<div class="zhengji">电脑配件：</div>
+					<ul>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+					</ul>
+				</div>
+				<div class="sou">
+					<div class="leibie">电脑类别：</div>
+					<ul>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+						<li><a href="">台式机</a></li>
+					</ul>
+				</div>
+				<div class="sou">
+					<div class="gaoji">高级选项：</div>
+					<ul class="gaojilist">
+						<li><a href=""><span>价格<i class="icon-xia"></i></span></a></li>
+						<li><a href=""><span>CPU<i class="icon-xia"></i></span></a></li>
+						<li><a href=""><span>处理器<i class="icon-xia"></i></span></a></li>
+						<li><a href=""><span>内存容量<i class="icon-xia"></i></span></a></li>
+						<li><a href=""><span>屏幕尺寸<i class="icon-xia"></i></span></a></li>
+						<li><a href=""><span>系统<i class="icon-xia"></i></span></a></li>
+						<li><a href=""><span>显卡<i class="icon-xia"></i></span></a></li>
+					</ul>
+				</div>
+			</div> -->
+			<div class="shop-list">
+				<div class="shop-list-left">
+					<h4>商品精选</h4>
+					<ul>
+						<li>
+							<a class="img" href=""><img src="./include/image/shoplist/jingxuan01.jpg" alt=""></a>
+							<p><a href="">得峰（Deffad）AG19 14英寸 可选I7独显 四核 轻薄便携办公 笔记本电</a></p>
+							<p><b>￥1225.00</b></p>
+							<p>已有<a href="">4144</a>人评价</p>
+						</li>
+						<li>
+							<a class="img" href=""><img src="./include/image/shoplist/jingxuan01.jpg" alt=""></a>
+							<p><a href="">得峰（Deffad）AG19 14英寸 可选I7独显 四核 轻薄便携办公 笔记本电</a></p>
+							<p><b>￥1225.00</b></p>
+							<p>已有<a href="">4144</a>人评价</p>
+						</li>
+						<li>
+							<a class="img" href=""><img src="./include/image/shoplist/jingxuan01.jpg" alt=""></a>
+							<p><a href="">得峰（Deffad）AG19 14英寸 可选I7独显 四核 轻薄便携办公 笔记本电</a></p>
+							<p><b>￥1225.00</b></p>
+							<p>已有<a href="">4144</a>人评价</p>
+						</li>
+						
+					</ul>
+				</div>
+	<?php 
+                
+                $xorder = 'num desc';
+                $neworder = 'state asc';
+                $corder = 'clicknum desc'; 
+                $zong = 'clicknum desc,num desc,state asc';
+                if(!empty($_GET['order']) && substr($_GET['order'],-4)=='desc'){
+                    
+                    $porder = 'price asc';
+                }else{
+                	$porder = 'price desc';
+                    
+                }
+
+    ?> 			
+				<div class="shop-list-right">
+					<div class="main-list">
+						<div class="limit">
+							<div class="limitall">
+								<a href="index.php?m=shop&a=show&order=<?php echo $zong; ?>"><span>综合</span><i class="icon01"></i></a>
+								<a href="index.php?m=shop&a=show&order=<?php echo $xorder; ?>"><span>销量</span><i class="icon01"></i></a>
+								<a href="index.php?m=shop&a=show&order=<?php echo $corder; ?>"><span>点击量</span><i class="icon01"></i></a>
+								<a href="index.php?m=shop&a=show&order=<?php echo $neworder; ?>"><span>新品</span><i class="icon01"></i></a>
+								<a href="index.php?m=shop&a=show&order=<?php echo $porder; ?>"><span>价格</span><i class="icon02"></i></a>
+						<!-- 顶部翻页 -->
+								<div class="allnum">
+									<div class="num">共<?php echo $count; ?>件商品 &nbsp; <?php  echo $page->page;?>/<?php echo $page->allpage;?> </div>
+									<a href=" ?m=shop&a=show&page=<?php echo $page->prepage;echo $search; ?>"><b class="icon03"><</b></a><a href=" ?m=shop&a=show&page=<?php echo $page->nextpage;echo $search; ?>"><b class="icon03">></b></a>
+								</div>	
+							</div>
+						</div>
+						<div class="select">
+							<div class="dizhi"><span>配送到</span><select >
+							<option value="">白净</option>
+							</select></div>
+							<!-- <a ><input type="checkbox" id="pei"><label for="pei"><span>京东配送</span></label></a>
+							<a ><input type="checkbox" id="fu"><label for="fu"><span>货到付款</span></label></a> -->
+							<a href="index.php?m=shop&a=show&page=<?php echo $page->page;echo $search;?>&store=1"><input type="checkbox" id="you"><label for="you"><span>仅显示有货</span></label></a>
+							<div class="search-limit">
+							<form action="index.php">
+								<input type="hidden" name="m" value="shop">
+								<input type="hidden" name="a" value="show">
+
+								<input type="text" placeholder="在结果中搜索" name="search" value="<?php echo $sousuo; ?>">
+								<input type="submit" value="确定">
+							</form>
+								
+							</div>
+						</div>
+						<div class="shoplist">
+							<ul>
+<?php
+if(isset($goods) && count($goods)>0){
+	foreach($goods as $v){
+		$str=<<<EOF
+		<li>
+			<a href="index.php?m=shop&a=desc&id={$v['id']}" class="shopimg"><img src="../admin/uploadimg/goods/{$v['pic']}" alt="" width="220" height="220"></a>
+			<p><strong>￥</strong><b>{$v['price']}</b></p>
+			<a class="words" href="">{$v['name']}</a>
+			<p>已有<a href="">{$v['clicknum']}+</a>人想买</p>
+			<div class="smallicon">
+				<img src="./include/image/shoplist/smallicon01.png" alt="" >
+				<b>赠</b>
+				<i></i>
+			</div>
+			<div class="add">
+				<a href="" class="duibi"><i></i><span>对比</span></a>
+				<a href="" class="guanzhu"><i></i><span>关注</span></a>
+				<a href="index.php?m=car&a=addcar&id={$v['id']}" class="jiaru"><i></i><span>加入购物车</span></a>
+			</div>
+		</li>
+
+EOF;
+	echo $str;
+	}
+
+
+}else{
+	echo '没有商品';
+}
+
+
+?>
+								<!-- 
+								<li>
+									<a href="" class="shopimg"><img src="./include/image/shoplist/shoplist01.jpg" alt=""></a>
+									<p><strong>￥</strong><b>6788.00</b></p>
+									<a class="words" href="">Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB </a>
+									<p>已有<a href="">8.8万+</a>人评价</p>
+									<div class="smallicon">
+										<img src="./include/image/shoplist/smallicon01.png" alt="">
+										<b>赠</b>
+										<i></i>
+									</div>
+									<div class="add">
+										<a href="" class="duibi"><i></i><span>对比</span></a>
+										<a href="" class="guanzhu"><i></i><span>关注</span></a>
+										<a href="" class="jiaru"><i></i><span>加入购物车</span></a>
+									</div>
+								</li> -->
+								
+							</ul>
+						</div>
+	
+					</div>
+
+     <!-- 这里把排序条件赋给变量 方便翻页 -->
+    <?php
+        $order='';
+        if(isset($_GET['order'])){
+            $order = '&order='.$_GET['order'];
+        }
+    ?>					
+		<!--分页  -->
+					<div class="fenye">
+						<div class="page">
+							<a href=" ?m=shop&a=show&page=<?php echo $page->prepage;echo $search;echo $order; ?>"><b class="icon-left"><</b>上一页</a>
+		<!-- 页码显示 -->
+        <?php
+       
+            for($i=1;$i<=$page->allpage;$i++){
+            	if($i>8){
+            	echo '<b style="position:relative;top:-5px;">...</b>';
+            		break;
+            	}
+                echo '<a href=" ?m=shop&a=show&page='.$i.$search.$order.'">'.$i.'</a> ';
+            }
+        
+        ?>			
+							
+							<b style="position:relative;top:-5px;">...</b>
+
+							<a href=" ?m=shop&a=show&page=<?php echo $page->nextpage;echo $search;echo $order; ?>">下一页<b class="icon-right">></b></a>
+						</div>
+						<div class="allpage">共<b> <?php echo $page->allpage;?> </b>页</div>
+					<form action="index.php">
+						<input type="hidden" name="m" value="shop">
+						<input type="hidden" name="a" value="show">
+						<input type="hidden" name="search" value="<?php echo $_GET['search']; ?>">
+						<div class="dpage">到第<input type="text" name="page" value="<?php  echo $page->page;?>">页</div>
+						<div class="tijiaopage"><input type="submit" value="确定"></div>	
+					</form>
+						
+					</div>
+				</div>
+			</div>
+			<!-- <div class="jingxuan"></div> -->
+			<!-- <div class="reset-search"></div> -->
+			<div class="ad">
+				<a href=""><img src="./include/image/shoplist/ad01.jpg" alt="" ></a>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>	

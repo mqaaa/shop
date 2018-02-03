@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<!-- 数据库 -->
+	<form action="index.php?a=do_config" method="post">
+			主机地址: <input type="text" name="db_host" value="localhost"><br>
+			用户名: <input type="text" name="db_user" value="root"><br>
+			密码: <input type="text" name="db_pwd" value=""><br>
+			数据库: <input type="text" name="db_name" value="pjceshi"><br>
+			表前缀: <input type="text" name="db_prefix" value=""><br>
+
+			<hr>
+
+			管理员：<input type="text" name="admin" value="admin"><br>
+			密码: <input type="password" name="pswd" value="admin"><br>
+			<input type="checkbox" name="ceshi" value="1">是否安装测试数据<br>
+			<input type="submit" value="提交">
+
+	</form>
+	
+</body>
+</html>

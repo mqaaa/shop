@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订单详情</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	<link rel="stylesheet" href="./include/css/dingdanxiangqing.css">
+	<link rel="stylesheet" href="./include/css/footer.css">
+</head>
+<body>
+	<header id="header">
+		<div class="head">
+			
+			<div class="head_top">
+
+				<div class="sign">
+				<div class="beijing"><a href="">北京</a></div>
+				<?php
+
+					//判断是否登录	
+					if(isset($_SESSION['god']) && $_SESSION['god']['islogin']==true){
+						$username = '亲爱的'.$_SESSION['god']['level'];
+						$dengji = $_SESSION['god']['name'];
+						$a = 'info';
+						$sign = 'info';
+					}else{
+						$username = '你好,请登录';
+						$a = 'login';
+						$dengji = '免费注册';
+						$sign = 'sign';
+					}
+
+				?>
+				<div class="nihao"><a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $username; ?></div>
+			</div>
+			<div class="top_list">
+				<ul>
+					<li ><a href="index.php?m=user&a=<?php echo $sign; ?>" style="color:#f10215"><?php echo $dengji; ?></a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=order&a=show">我的订单</a></li>
+					<li class="top_list_fuhao"><span>|</span></li> 
+					<li class="top_list_word"><a href="index.php?m=info&a=show">我的京东</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="#">京东会员</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="#">企业采购</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li class="top_list_word"><a href="#">客户服务</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li class="top_list_word"><a href="#">网站导航</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="index.php?m=user&a=out">退出登录</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="search_nav">
+			<div class="top_search">
+				<!-- logo -->
+				<a class="logo_shop" href="index.php">
+					<img src="./include/image/vip/logo.png" alt="">
+					<img src="./include/image/vip/logo_right.png" alt="" class="tupian">
+				</a>
+				<ul class="nav">
+					<li><a href="">首页</a></li>
+					<li class="shezhi">账户设置 <i></i></li>
+					<li class="shequ">社区 <i></i></li>
+					<li class="xiaoxi"><a href="">消息 </a><i>11</i></li>
+				</ul>
+				<!-- 搜索框以及购物车 -->
+				<div class="top_search02">
+					<div class="top_search_center">
+						<form action="index.php">
+						<div class="input">
+							<input type="hidden" name="m" value="shop">
+							<input type="hidden" name="a" value="show">
+							<input type='text' name="search" class='input1' value="<?php echo $sousuo; ?>" placeholder="请输入商品">
+							<input type='submit'  value="搜索" class='input2'>			
+						</div>			
+					
+						</form>
+						
+					
+					</div>
+					<div class="top_search_right">
+						<div class="carbody">
+							<i class="icon_car"></i>
+							<a class="shopcar" href="index.php?m=car&a=show">
+								我的购物车
+								<div class="shopnum">0</div>
+								>
+							</a>
+							
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>	
+	</header>
+	<div id="zhuti">
+		<div class="zhuti_body">
+			<div class="body_top">
+				<a href="">我的京东</a> > <a href="index.php?m=order&a=show">订单中心</a> > 
+				<b>订单：44078831396</b>
+			</div>
+			<div class="shop_state">
+				<div class="state_left">
+					<div class="left01"><span>订单号：<?php echo $arrs['id']; ?></span></div>
+	<?php
+	
+		$sta = array('付款成功','商品出库','等待收货','完成');
+
+
+
+
+
+
+	?>				
+					<div class="left02"><b><?php echo $sta[$arrs['status']]; ?></b></div>
+					<div class="left03"><a href="">评价</a></div>
+					<div class="left04"><a href="">打印订单</a></div>
+				</div>
+				<div class="state_right">
+					<div class="right01"><span>订单已经完成，感谢您在京东商城购物，欢迎您对本次交易及所购商品进行评价。</span>
+					</div>
+					<div class="right02">
+						<ul>
+							<li>
+								<div></div>
+								<p>提交订单</p>
+								<p><?php echo date('Y-m-d H:i:s',$arrs['addtime']); ?></p>
+							</li>
+							<li>
+								<div ></div>
+								<p>付款成功</p>
+								<p><?php echo date('Y-m-d H:i:s',$arrs['addtime']); ?></p>
+							</li>
+				<?php
+					if($arrs['status'] == 1){
+						echo '
+							<li>
+								<div></div>
+								<p>商品出库</p>
+								
+							</li>
+							<li>
+								<div></div>
+								<p>等待收货</p>
+								
+							</li>';
+					}elseif($arrs['status'] == 2){
+						echo '<li>
+								<div></div>
+								<p>商品出库</p>
+								
+							</li>
+							<li>
+								<div></div>
+								<p>等待收货</p>
+								
+							</li>
+							<li class="last">
+								<div class="last"></div>
+								<p>完成</p>
+								<p>'.date('Y-m-d H:i:s',time()).'</p>
+							</li>';
+					}
+
+
+
+				?>			
+							
+						</ul>
+						
+					</div>
+					<div class="right03">
+						<div>
+							<a href="">京豆<span>+18</span></a>
+							<a href="">会员成长值<span>+188</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="shop_wuliu">
+				<div class="wuliu_left">
+					<a href=""><img src="../admin/uploadimg/goods/<?php echo $good[$arr['goodsid']]['pic']; ?>" alt="" width="106px" height="106px"></a>
+					送货方式：<span>普通快递</span>
+				</div>
+				
+				<div class="wuliu_right">
+					<ul>
+		<?php
+			if($arrs['status'] == 0){
+
+				$str = '<li><p>
+							<i>1</i>
+							<span>'.date('Y-m-d H:i:s',$arrs['addtime']).'
+							</span>
+							<span>【山西省公司】 订单交易生成</span>
+						</p></li>';
+				echo $str;		
+			}elseif($arrs['status'] == 1){
+				$str ='<li><p>
+							<i>3</i>
+							<span>2017-11-11 18:47:10</span>
+							<span>【山西省公司】 派件人: XX 派件中 派件员电话13754955490</span>
+						</p></li>
+						<li><p>
+							<i>2</i>
+							<span>2017-11-11 18:47:10</span>
+							<span>【山西省公司】 已收入</span>
+						</p></li>
+						<li><p>
+							<i>1</i>
+							<span>'.date('Y-m-d H:i:s',$arrs['addtime']).'
+							</span>
+							<span>【山西省公司】 订单交易生成</span>
+						</p></li>';
+					echo $str;	
+			}elseif($arrs['status'] == 2){
+				$str ='<li><p>
+							<i>4</i>
+							<span>2017-11-11 18:47:10</span>
+							<span>客户 签收人: 邮件收发章 已签收 感谢使用吹牛逼速递，期待再次为您服务</span>
+						</p></li>
+						<li><p>
+							<i>3</i>
+							<span>2017-11-11 18:47:10</span>
+							<span>【山西省公司】 派件人: XX 派件中 派件员电话13754955490</span>
+						</p></li>
+						<li><p>
+							<i>2</i>
+							<span>2017-11-11 18:47:10</span>
+							<span>【山西省公司】 已收入</span>
+						</p></li>
+						<li><p>
+							<i>1</i>
+							<span>'.date('Y-m-d H:i:s',$arrs['addtime']).'
+							</span>
+							<span>【山西省公司】 订单交易生成</span>
+						</p></li>';
+					echo $str;	
+			}
+
+
+
+
+		?>			
+						
+					</ul>
+				</div>
+			</div>
+			<div class="shop_shouhuo">
+				<ul class="waiceng">
+					<li>
+						<ul>
+							<li><div>收货人信息</div></li>
+							<li>
+								<div>收货人：</div>
+								<span><?php echo $arrs['linkman']; ?></span>
+							</li>
+							<li>
+								<div>地址：</div>
+								<span><?php echo $arrs['address']; ?></span>
+							</li>
+							<li>
+								<div>手机号码：</div>
+								<span><?php echo $arrs['phone']; ?></span>
+							</li>
+							<li>
+								<div>邮政编码：</div>
+								<span><?php echo $arrs['code'] ?></span>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li><div>配送信息</div></li>
+							<li>
+								<div>配送方式：：</div>
+								<span>普通快递</span>
+							</li>
+							<li>
+								<div>联系电话：</div>
+								<span>110</span>
+							</li>
+							<li>
+								<div>运费：</div>
+								<span>¥10.00</span>
+							</li>
+							<li>
+								<div>邮箱：</div>
+								<span>666666@qq.com</span>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li><div>付款信息</div></li>
+							<li>
+								<div>付款方式：</div>
+								<span>在线支付</span>
+							</li>
+							<li>
+								<div>商品总额：</div>
+								<span>¥<?php echo $arrs['total']; ?></span>
+							</li>
+							<li>
+								<div>应支付金额：</div>
+								<span>¥<?php echo $arrs['total']; ?></span>
+							</li>
+							<li>
+								<div>运费金额：</div>
+								<span>¥0.00</span>
+							</li>
+							<li>
+								<div>优惠券：</div>
+								<span>¥0.00</span>
+							</li>
+							
+							<li>
+								<div>订单优惠：</div>
+								<span>¥0.00</span>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li><div>发票信息</div></li>
+							<li>
+								<div>发票类型：</div>
+								<span>不开发票</span>
+							</li>
+							
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="shop_jiesuan">
+				<table class="shop_body" cellspacing="0" >
+				<tr class="headshop">
+					<td class="xuanze">
+						商品
+					</td>
+					<td class="shangpin">
+						商品编号
+					</td>
+					<td class="danjia">
+						京东价
+					</td>
+					<td class="shuliang">
+						数量
+					</td>
+					<td class="xiaoji">
+						京豆
+					</td>
+					<td class="caozuo">
+						操作
+					</td>
+				</tr>
+				<tr class="shopmsg">
+					
+					<td >
+						<div class="shopxiangqing">
+							<div class="shop01">
+								<img src="../admin/uploadimg/goods/<?php echo $good[$arr['goodsid']]['pic']; ?>" alt="" width="82px" height="82px">
+							</div>
+							<a href=""><?php echo $good['name']; ?></a>
+						</div>
+					</td>
+					<td >
+						<span><?php echo $arrs['id'] ?></span>
+					</td>
+					<td >
+						<span >¥<?php echo $arrs['total']; ?></span>
+					</td>
+					<td >
+						<div class="number">
+							
+							<b><?php echo $arr['gnum']; ?></b>
+						</div>
+						
+					</td>
+					<td class="xiaoji">
+						
+						<p>18</p>
+					</td>
+					<td >
+						<p><a href="">申请返修/退换货</a></p>
+						<p><a href="">评价|晒单</a></p>
+						<p><a href="index.php?m=shop&a=desc&id=<?php echo $arr['goodsid']; ?>" id="lijigoumai"><i></i>立即购买</a></p>
+					</td>
+				</tr>
+				
+				
+			</table>
+			<div class="jiesuan_last">
+				<p><span>商品总额：</span><span>¥<?php echo $arrs['total'] ?></span></p>
+				<p><span>返　　现：</span><span>-¥0.00</span></p>
+				<p><span>商品优惠：</span><span>-¥0.00</span></p>
+				<p><span>运　　费：</span><span>¥0.00</span></p>
+				<p><span>应付总额：</span><span><b>¥<?php echo $arrs['total'] ?></b></span></p>
+			</div>
+			</div>
+
+		</div>		
+	</div>
+	

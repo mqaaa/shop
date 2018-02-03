@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>当前环境信息</h2>
+		<p>当前php版本---------------<?php echo PHP_VERSION;  ?></p>
+		<p>当前操作系统为-----------------<?php  echo PHP_OS; ?></p>
+		<p>当前web服务器版本为-----------------<?php  echo apache_get_version(); ?></p>
+
+		<hr>
+		<p>../public/dbconfig.php----------------<?php  echo is_writeable('../public/dbconfig.php')?'可写':'不可写'; ?></p>
+		<a href="./index.php?a=config">下一步</a>
+</body>
+</html>

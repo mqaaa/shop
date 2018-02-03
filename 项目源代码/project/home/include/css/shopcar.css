@@ -1,0 +1,391 @@
+*{
+	padding:0;
+	margin:0;
+}
+body{
+	background: #FFF;
+}
+ a{
+	text-decoration:none;
+	color:#666;
+	font-size: 12px;
+}
+a:hover{
+	color: #f10215;
+}
+ li{
+	list-style:none;
+}
+/*头部*/
+#header{
+	width:100%;
+	
+	overflow: hidden;
+	
+}
+#header .head{
+	width:100%;
+	background:#E3E4E5;
+	
+	position: relative;
+}
+/*#header .head .logo_big{
+	position: absolute;
+	width: 190px;
+	height: 170px;
+	top: 0;
+	left: 37px;
+	z-index: 999;
+	background: #fff;
+	box-shadow: 0 2px 10px #ccc; 
+}*/
+#header .head_top{
+	width:1190px;
+	height:30px;
+	margin:0 auto;
+
+}
+#header .head_top .sign{
+	float:left;
+	height:30px;
+	line-height:30px;
+	width:520px;
+	overflow: hidden;
+	
+}
+#header .head_top .sign .beijing{
+	float:left;
+	/*background:url(../image/index/icon_zuobiao.png) no-repeat 0 3px;*/
+	/*padding-left:20px;*/
+	height:30px;
+	line-height: 30px;
+}
+#header .head_top .sign .nihao{
+	float:right;
+}
+
+#header .head_top .top_list{
+	float:right;
+	width:670px;
+	height:30px;
+}
+#header .head_top .top_list ul{
+	float:right;
+}
+#header .head_top .top_list ul li{
+	float: left;
+	height:30px;
+	line-height: 30px;
+	margin-right:10px;
+}
+#header .head_top .top_list ul li a{
+	font-size: 13px;
+	color: #63595A;
+}
+#header .head_top .top_list ul li a:hover{
+	color: #f10215;
+}
+#header .head_top .top_list ul li span{
+	font-size: 10px;
+	color:#999;
+	opacity: 0.6;
+}
+#header .head_top .top_list ul li.top_list_word{
+	padding-right: 17px;
+	background: url(../image/index/icon_xiabiao.png) no-repeat 52px 4px;
+}
+#header .search_nav{
+	width:100%;
+	background: #FFF;
+	overflow: hidden;
+}
+#header .top_search{
+	width:1190px;
+	height:100px;
+	margin:0 auto;
+	overflow: hidden;
+	
+}
+#header .top_search .logo_shop{
+	display: block;
+	float: left;
+	width: 270px;
+	height: 85px;
+	margin-top: 10px;
+	overflow:hidden;
+}
+
+#header .top_search .top_search02{
+	float:right;
+	overflow:hidden;
+}
+#header .top_search .top_search_center{
+	width:564px;
+	height:100px;
+	float:left;
+	
+}
+#header .top_search .top_search_center .input{
+	width:330px;
+	height:35px;
+	
+	float:right;
+	margin-top:40px;
+	
+}
+#header .top_search .top_search_center .input .input1{
+	width:270px;
+	height:24px;
+	display:block;
+	outline:0;
+	border:2px solid #B61D1D;
+	float:left;
+	padding-left: 5px;
+}
+#header .top_search .top_search_center .input .input2{
+	width:48px;
+	height:28px;
+	display:block;
+	float:left;
+	background:#B61D1D ;
+	background-position: 7px 2px;
+	border:0;
+	color: #fff;
+	font-size: 14px;
+	cursor:pointer;
+}
+#header .top_search .top_search_center .top_search_word{
+	width:550px;
+	margin-top:10px;
+	clear:both;
+	padding-top:5px;
+}
+#header .top_search .top_search_center .top_search_word a{
+	padding-right:1px;
+	
+}
+/*搜索框*/
+#header .top_search .top_search_right{
+	width:300px;
+	height:120px;	
+	float:left;
+	
+}
+#header .top_search .top_search_right .shopcar{
+	display: block;
+	padding-left: 32px;
+	background:#F9F9F9 url(../image/index/icon_car.png) no-repeat 35px 2px;
+	width:155px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	border: 1px solid #ccc;
+	margin-top:25px;
+	margin-left:86px;
+	font-size:13px;
+	color: #f10215;
+}
+#header .top_search .top_search_right .shopcar:hover{
+	background:#Fff url(../image/index/icon_car.png) no-repeat 35px 2px;
+}
+#header .top_search .top_search_right .shopcar .shopnum{
+	line-height:16px;
+	position: relative;
+	top: -5px;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	color: #fff;
+	background: #f10215;
+	border-radius: 50%;
+}
+
+/*购物车主体*/
+#shoplist{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+
+}
+#shoplist .shoplist1{
+	width: 1190px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-bottom: 200px;
+}
+#shoplist .shoplist1 .shop_top{
+	width: 1190px;
+	height: 37px;
+	margin-top: 15px;
+}
+#shoplist .shoplist1 .shop_top h3{
+	float: left;
+	margin-right: 30px;
+}
+#shoplist .shoplist1 .shop_top>div{
+	float: right;
+	font-size: 13px;
+
+}
+#shoplist .shoplist1 .shop_top>div>span{
+	border:1px solid #666;
+	padding: 3px 2px;
+	margin-right:5px; 
+}
+#shoplist .shoplist1 .shop_body{
+	width: 1190px;
+	height: auto;
+	overflow: hidden;
+	border:0;
+
+}
+#shoplist .shoplist1 .shop_body .headshop{
+	width: 1190px;
+	height: 45px;
+	background: #F3F3F3;
+	border-top: 1px solid #E0E0E0;
+	border-bottom: 1px solid #E0E0E0;
+	font-size: 13px;
+	text-align: center;
+}
+#shoplist .shoplist1 .shop_body .headshop .xuanze{
+	width: 100px;
+	border-top: 1px solid #E0E0E0;
+}
+#shoplist .shoplist1 .shop_body .headshop .shangpin{
+	/*width: 300px;*/
+	border-top: 1px solid #E0E0E0;
+}
+#shoplist .shoplist1 .shop_body .headshop .danjia{
+	width: 160px;
+	border-top: 1px solid #E0E0E0;
+}
+#shoplist .shoplist1 .shop_body .headshop .shuliang{
+	width: 80px;
+	border-top: 1px solid #E0E0E0;
+}
+#shoplist .shoplist1 .shop_body .headshop .xiaoji{
+	width: 140px;
+	font-size: 13px;
+	border-top: 1px solid #E0E0E0;
+}
+#shoplist .shoplist1 .shop_body .headshop .caozuo{
+	width: 75px;
+	border-top: 1px solid #E0E0E0;
+}
+#shoplist .shoplist1 .shop_body .chaqu{
+	width: 1190px;
+	height: 40px;
+	border-bottom: 2px solid #666;
+}
+
+#shoplist .shoplist1 .shop_body .shopmsg{
+	height: 110px;
+	font-size: 13px;
+	text-align: center;
+	
+}
+#shoplist .shoplist1 .shop_body .shopmsg>td{
+	border-bottom: 1px solid #f1f1f1;
+}
+#shoplist .shoplist1 .shop_body .shopmsg .shopxiangqing{
+	width: 380px;
+	height: 90px;
+	padding-top: 20px;
+
+}
+#shoplist .shoplist1 .shop_body .shopmsg .shopxiangqing .shop01{
+	width: 82px;
+	height: 82px;
+	float: left;
+	
+	margin-right: 10px;
+	background: url(../image/shopcar/shop-bg.png) no-repeat;
+}
+#shoplist .shoplist1 .shop_body .shopmsg .number{
+	width: 95px;
+	height: 22px;
+
+}
+#shoplist .shoplist1 .shop_body .shopmsg .number a{
+	display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	border:1px solid #A9A9A9;
+	font-size: 15px;
+	line-height: 20px;
+	text-align: center;
+}
+#shoplist .shoplist1 .shop_body .shopmsg .number input{
+	display: block;
+	float: left;
+	width: 46px;
+	height: 18px;
+	text-align: center;
+
+}
+#shoplist .shoplist1 .shop_body .shopmsg2{
+	height: 60px;
+	font-size: 13px;
+	text-align: center;
+	
+}
+#shoplist .shoplist1 .shop_body .shopmsg2>td{
+	border: 1px solid #f1f1f1;
+
+}
+/*#shoplist .shoplist1 .shop_body tr.shopmsg td.quanxuan{
+	 border: 1px solid #f1f1f1;
+}*/
+#shoplist .shoplist1 .shop_body tr.shopmsg2 td.shanchu{
+	text-align: left ;
+	/*border: 1px solid #f1f1f1;*/
+	border-left:0;
+}
+#shoplist .shoplist1 .shop_body tr.shopmsg2 td.shanchu .jiesuan1{
+	float: left;
+
+	width: 500px;
+	height: 52px;
+	line-height: 52px;
+}
+#shoplist .shoplist1 .shop_body tr.shopmsg2 td.shanchu .jiesuan2{
+	float: right;
+	
+	width: 317px;
+	height: 52px;
+}
+#shoplist .shoplist1 .shop_body tr.shopmsg2 td.shanchu .jiesuan2 .shuliang{
+	float: left;
+	
+	width: 100px;
+	height: 52px;
+	line-height: 52px;
+}
+#shoplist .shoplist1 .shop_body tr.shopmsg2 td.shanchu .jiesuan2 .zongjia{
+	float: left;
+	
+	width: 120px;
+	height: 47px;
+	padding-top: 2px;
+}
+#shoplist .shoplist1 .shop_body tr.shopmsg2 td.shanchu .jiesuan2 .fukuan2{
+	display: block;
+	border: 0;
+	float: left;
+	
+	width: 96px;
+	height: 52px;
+	line-height: 52px;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	background: #E64346;
+	color: #fff;
+	cursor: pointer;
+}
+#shoplist .shoplist1 .shop_body tr.shopmsg2 td.shanchu .jiesuan2 .fukuan2:hover{
+	background:red;
+}

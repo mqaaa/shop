@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册页</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	<link rel="stylesheet" href="./include/css/sign.css">
+	<link rel="stylesheet" href="./include/css/public_sign_denglu.css">
+</head>
+<body>
+	<!-- 注册顶部 --><!-- <?php var_dump($_SESSION['code']); ?> -->
+	<header id="header">
+		<div class="headmiaobian">
+		<div class="head">
+			<a href="index.php"><img src="./include/image/denglu/jd-logo.png" alt="" class="logo"></a>
+			<img src="./include/image/sign/top_word.jpg" alt="" class="word1">
+			<a class="head_word1" href="index.php?m=user&a=login">
+				已有账号？请登录
+			</a>
+		</div>
+		</div>
+	</header>
+	<!-- 注册主体 -->
+	<div id="sign">
+		<div class="sign_body">
+			<div class="sign_left">				
+				<form action="index.php?m=user&a=do_sign" class="biaodan" method="post">
+					<div class="xtbd">
+						<div class="username">
+							<span>用　户　名</span>
+							<input type="text" name="username" placeholder="账户名" required>
+						</div>
+						<div class="username">
+							<span>设 置 密 码</span>
+							<input type="password" name="pwd" placeholder="建议使用两种字符组合" required>
+						</div>
+						<div class="username">
+							<span>确 认 密 码</span>
+							<input type="password" name="repwd" placeholder="请在次输入密码" required>
+						</div>
+						<div class="username">
+							<span>中国 0086</span>
+							<input type="text" name="phone" placeholder="建议使用常用手机" required>
+						</div>
+						<div class="username yanzhengimg">
+							<span>验　证　码</span>
+							<input type="text" name="code" placeholder="请输入验证码" required>
+							<img src="./org/MyCode.class.php" alt="" onclick="this.src='./org/MyCode.class.php?'+Math.random()" id="ok" width="150" height="36px">
+							<!-- <img src="./include/image/sign/yanzhengma.jpg" alt="验证码" width="150" height="36px"> -->
+						</div>
+						<div class="username shoujiyanzheng">
+							<span>手机验证码</span>
+							<input type="text" name="yanzhengma" placeholder="这个功能没有哦，别输了" disabled>
+							<a class="huoqu" >点击获取</a>
+						</div>
+					</div>
+					<div class="xieyi">
+						<input type="checkbox" name="xieyi" value="true" class="xieyi1" checked>
+						我已阅读并同意<a href="">《京东用户注册协议》</a>
+					</div>
+					<div class="tijiao">
+						
+						<input type="submit" name="yanzhnegma" value="立即注册">
+					</div>
+				</form>
+			</div>
+			<div class="sign_right">
+				<a class="qiye" href="">
+					<i></i><span>企业用户注册</span>
+				</a>
+				<a class="diqiu" href="">
+					<i></i><span>INTERNATIONAL CUSTOMERS</span>
+				</a>
+				<img src="./include/image/sign/phone.jpg" alt="" class="signimg">
+			</div>
+		</div>
+	</div>
+	<!-- 注册底部 -->
+	<footer id="footer">
+		<div class="foot">
+			<ul>
+				<li><a href="">关于我们</a><span>|</span></li>
+				<li><a href="">联系我们</a><span>|</span></li>
+				<li><a href="">人才招聘</a><span>|</span></li>
+				<li><a href="">商家入驻</a><span>|</span></li>
+				<li><a href="">广告服务</a><span>|</span></li>
+				<li><a href="">手机京东</a><span>|</span></li>
+				<li><a href="">友情链接</a><span>|</span></li>
+				<li><a href="">销售联盟 </a><span>|</span></li>
+				<li><a href="">京东社区 </a><span>|</span></li>
+				<li><a href="">京东公益 </a><span>|</span></li>
+				<li><a href="">English Site</a><span>|</span></li>
+			</ul>
+			<div class="zuidibu">
+				Copyright © 2004-2017  京东JD.com 版权所有
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

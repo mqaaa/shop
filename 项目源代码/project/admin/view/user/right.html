@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./include/js/jquery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".click").click(function(){
+  $(".tip").fadeIn(200);
+  });
+  
+  $(".tiptop a").click(function(){
+  $(".tip").fadeOut(200);
+});
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+
+
+</script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+        width : 345           
+    });
+    $(".select2").uedSelect({
+        width : 167  
+    });
+    $(".select3").uedSelect({
+        width : 100
+    });
+});
+</script>
+<style>
+    
+    #tab2 .vocation{
+        float:right;
+        position:relative;
+        top:7px;
+    }
+    #tab2 .chaxun input{
+        width:30px;
+        border:1px solid #ccc;
+    }
+    table th,td{
+        text-align:center;
+    }
+</style>
+
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">数据表</a></li>
+    <li><a href="#">基本内容</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+       
+    <div class="tools">
+    
+        <ul class="toolbar">
+    <!-- 添加按钮 -->
+        <a href="./index.php?m=user&a=add"><li class="click"><span><img src="./include/images/t01.png" title="添加会员"/></span></li></a>
+    <!-- 多条删除按钮 -->
+        <li><span><input type="image" src="./include/images/i04.png" width="35" style="position:relative;top:-7px;left:2px;" title="放入回收站" form='myform'></span></li>
+        </ul>
+        
+        
+        <ul class="toolbar1">
+        <li><span><img src="./include/images/t05.png" /></span>设置</li>
+        </ul>
+    
+    </div>
+        	 
+    <div id="tab2" class="tabson">
+    <!-- 查询模块 -->
+    <form action="./index.php" method="get">
+        <ul class="seachform">
+        <input type="hidden" name="m" value="user">
+        <input type="hidden" name="a" value="show">
+
+
+            <li><label>精准查询</label>
+                <input name="search" type="text" class="scinput" value="<?php echo $s->sousuo;?>" placeholder="请输入用户名或关键字"/>
+            </li>
+    <?php
+        $jin=$pt=$vip=$chao='';
+        if(isset($_GET['lev'])){  //保持等级搜索框的值
+            switch($_GET['lev']){
+                
+                case '2':
+                    $jin = 'selected';
+                break;  
+                case '0':
+                    $pt = 'selected';
+                break;  
+                case '1':
+                    $vip = 'selected';
+                break;  
+                case '3':
+                    $chao = 'selected';
+                break;          
+            }
+            
+        }
+     ?>
+            <li><label>权限:</label>  
+            <div class="vocation" >
+            <select class="select3" name="lev">
+            <option value='' >全部</option>
+            <option value="0" <?php echo $pt; ?> >普通</option>
+            <option value="1" <?php echo $vip; ?> >VIP</option>
+            <option value="2" <?php echo $jin; ?> >禁用</option>
+            <option value="3" <?php echo $chao; ?> >超管</option>
+            </select>
+            </div>
+            </li>
+            
+            <li><label>编号区间:</label>  
+            <div class="vocation chaxun" >
+                <input type="num" name="num1" value="<?php echo $s->num1; ?>">~
+                <input type="num" name="num2" value="<?php echo $s->num2; ?>">
+               
+            </div>
+            </li>
+            
+           
+           
+        <?php
+            $day = $week = $month ='';
+            if(!empty($_GET['time'])){
+                switch($_GET['time']){     
+                    case '-3 day':
+                        $day = 'selected';     //保持搜索框的值
+                    break;
+                    case '-3 week':
+                        $week = 'selected';
+                    break;
+                    case '-3 month':
+                        $month = 'selected';
+                    break;
+                }
+            }
+         ?>   
+            <li><label>时间查询:</label>  
+            <div class="vocation">
+            <select class="select3" name="time">
+            <option value="">--请选择--</option>
+            <option value="-3 day" <?php echo $day; ?>> 三天前</option>
+            <option value="-3 week" <?php echo $week; ?>> 三周前</option>
+            <option value="-3 month" <?php echo $month; ?>> 三个月前</option>
+            </select>
+            </div>
+            </li>
+          
+            <li><label>性别查询:</label>  
+            <div class="vocation">
+                 <input type="checkbox" name="sex[]" value="0" <?php echo $s->sex0;?> >女
+                 <input type="checkbox" name="sex[]" value="1" <?php echo $s->sex1;?> >男
+                 <input type="checkbox" name="sex[]" value="2" <?php echo $s->sex2; ?>>未知          
+            </div>
+            </li>
+            
+            <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+            
+        </ul>
+    </form>
+    
+    
+        </div>
+    
+    <!-- 会员列表模块 -->
+        <table class="tablelist" id='ulist'>
+        	<thead>
+        	<tr>
+           <?php 
+                
+                if(!empty($_GET['order']) && substr($_GET['order'],-4)=='desc'){
+                    $iorder = 'id asc';
+                    $uorder = 'username asc';
+                    $lvorder = 'level asc'; 
+                    $torder = 'addtime asc';
+                }else{
+                    $iorder = 'id desc';
+                    $uorder = 'username desc';
+                    $lvorder = 'level desc'; 
+                    $torder = 'addtime desc';
+                }
+
+           ?> 
+
+            <th><input name="" type="checkbox" value="" id="maincheck"/></th> <!-- 这里是控制全选按钮 -->
+           
+           <th><a href=" ?m=user&a=show&order=<?php echo $iorder;?>&page=<?php echo $page->page; echo $s->search; echo $s->searchlev; echo $s->qujian; echo $s->shijianchuo;echo $s->sexcanshu;?>">编号<i class="sort"><img src="./include/images/px.gif" /></i></a></th> 
+
+            <th><a href=" ?m=user&a=show&order=<?php echo $uorder;?>&page=<?php echo $page->page; echo $s->search; echo $s->searchlev; echo $s->qujian; echo $s->shijianchuo;echo $s->sexcanshu;?>">用户<i class="sort"><img src="./include/images/px.gif" /></i></a></th>
+
+            <th><a href=" ?m=user&a=show&order=<?php echo $lvorder;?>&page=<?php echo $page->page; echo $s->search; echo $s->searchlev; echo $s->qujian; echo $s->shijianchuo;echo $s->sexcanshu;?>">权限<i class="sort"><img src="./include/images/px.gif" /></i></a></th>
+            <th><a href=" ?m=user&a=show&order=<?php echo $torder;?>&page=<?php echo $page->page; echo $s->search; echo $s->searchlev; echo $s->qujian; echo $s->shijianchuo;echo $s->sexcanshu;?>">添加时间<i class="sort"><img src="./include/images/px.gif" /></i></a></th> 
+            <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+      <form action="./index.php?m=user&a=do_remove" method="post" id='myform'>
+<?php 
+if($row){
+    foreach($row as $k=>$v){
+
+        echo "<tr >";
+        echo "<td><input name='dels[]' type='checkbox' value='{$v['id']}' class='check'/></td>";        
+        echo "<td>{$v['id']}</td>";       
+        echo "<td>{$v['username']}</td>";        
+        echo "<td>{$level[$v['level']]}</td>"; 
+        $t = date('Y-m-d H:i:s',$v['addtime']);       
+        echo "<td>{$t}</td>";               
+        echo "<td>";
+        echo "<a href='./index.php?m=user&a=add&id={$v['id']}' class='tablelink'>修改</a> ";
+        //自己不能删除自己
+        if($_SESSION['user']['id']!=$v['id']){
+             echo "    <a href='./index.php?m=user&a=do_remove&id={$v['id']}' class='tablelink'> 删除</a>";
+        }
+       
+        echo    "<a href='./index.php?m=user&a=info&id={$v['id']}&u={$v['username']}&ji={$v['level']}' class='tablelink'> 查看详细</a></td>";
+
+        echo "</tr>"; 
+
+    }
+}
+
+
+
+?>
+       </form>  
+        </tbody>
+    </table>
+    <!-- 这里把排序条件赋给变量 方便翻页 -->
+    <?php
+        $order='';
+        if(isset($_GET['order'])){
+            $order = '&order='.$_GET['order'];
+        }
+    ?>
+   
+    <div class="pagin">
+
+    <!-- 分页 -->
+    	<div class="message">共<i class="blue"><?php echo $page->allpage;?></i>页，当前显示第&nbsp;<i class="blue"><?php echo $page->page; ?>&nbsp;</i>页</div>
+
+        <ul class="paginList"> 
+        <!-- 首页 -->
+        <?php
+            
+                echo '<li class="paginItem">
+                <a href=" ?m=user&a=show&page=1'.$s->search.$s->searchlev.$s->qujian.$s->shijianchuo.$s->sexcanshu.$order.'">'.'首'.'</a></li>';
+        
+        ?>
+         <!-- 上一页 -->
+        <li class="paginItem"><a href=" ?m=user&a=show&page=<?php echo $page->prepage; echo $s->search; echo $s->searchlev; echo $s->qujian; echo $s->shijianchuo;echo $s->sexcanshu;echo $order;?>"><span class="pagepre"></span></a></li>
+        <!-- 页码显示 -->
+        <?php
+       
+            for($i=1;$i<=$page->allpage;$i++){
+                echo '<li class="paginItem">
+                <a href=" ?m=user&a=show&page='.$i.''.$s->search.$s->searchlev.$s->qujian.$s->shijianchuo.$s->sexcanshu.$order.'">'.$i.'</a></li>';
+            }
+        
+        ?>
+        <!-- 下一页 -->
+        <li class="paginItem"><a href=" ?m=user&a=show&page=<?php echo $page->nextpage; ?><?php echo $s->search; echo $s->searchlev; echo $s->qujian; echo $s->shijianchuo;echo $s->sexcanshu;echo $order;?>"><span class="pagenxt"></span></a></li>
+
+        <!-- 尾页 -->
+        <?php
+            
+                echo '<li class="paginItem">
+                <a href=" ?m=user&a=show&page='.$page->allpage.''.$s->search.$s->searchlev.$s->qujian.$s->shijianchuo.$s->sexcanshu.$order.'">'.'尾'.'</a></li>';
+        
+        ?>
+
+        </ul>
+
+    </div>
+    
+    
+        <!-- <div class="tip">
+        	<div class="tiptop"><span>提示信息</span><a></a></div>
+            
+          <div class="tipinfo">
+            <span><img src="../include/images/ticon.png" /></span>
+            <div class="tipright">
+            <p>是否确认对信息的修改 ？</p>
+            <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
+            </div>
+            
+            <div class="tipbtn">
+            <input name="" type="button"  class="sure" value="确定" />&nbsp;
+            <input name="" type="button"  class="cancel" value="取消" />
+            </div>
+        
+        </div> -->
+        
+    
+    
+    
+    </div>
+    
+    <script type="text/javascript">
+	$('.tablelist tbody tr:odd').addClass('odd');
+    var omain = document.getElementById('maincheck');
+    var list = document.getElementById('ulist');
+    var checks = list.getElementsByClassName('check');
+     omain.onclick=function(){
+        if(omain.checked){
+            for($i=0;$i<checks.length;$i++){
+                checks[$i].checked = true;
+            }
+        }else{
+            for($i=0;$i<checks.length;$i++){
+                checks[$i].checked = false;
+            }
+        }
+     }   
+    
+
+    
+	</script>
+
+</body>
+
+</html>

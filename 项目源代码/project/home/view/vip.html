@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>会员主页</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	<link rel="stylesheet" href="css/vip.css">
+	<link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+	<header id="header">
+		<div class="head">
+			
+			<div class="head_top">
+
+				<div class="sign">
+				<div class="beijing"><a href="">北京</a></div>
+				<?php
+
+					//判断是否登录	
+					if(isset($_SESSION['god']) && $_SESSION['god']['islogin']==true){
+						$username = '亲爱的'.$_SESSION['god']['level'];
+						$dengji = $_SESSION['god']['name'];
+						$a = 'info';
+						$sign = 'info';
+					}else{
+						$username = '你好,请登录';
+						$a = 'login';
+						$dengji = '免费注册';
+						$sign = 'sign';
+					}
+
+				?>
+				<div class="nihao"><a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $username; ?></div>
+			</div>
+			<div class="top_list">
+				<ul>
+					<li ><a href="index.php?m=user&a=<?php echo $sign; ?>" style="color:#f10215"><?php echo $dengji; ?></a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=order&a=show">我的订单</a></li>
+					<li class="top_list_fuhao"><span>|</span></li> 
+					<li class="top_list_word"><a href="index.php?m=info&a=show">我的京东</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="#">京东会员</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="#">企业采购</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li class="top_list_word"><a href="#">客户服务</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li class="top_list_word"><a href="#">网站导航</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="index.php?m=user&a=out">退出登录</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="search_nav">
+			<div class="top_search">
+				<!-- logo -->
+				<a class="logo_shop" href="index.php">
+					<img src="image/vip/logo.png" alt="">
+					<img src="image/vip/logo_right.png" alt="" class="tupian">
+				</a>
+				<ul class="nav">
+					<li>首页</li>
+					<li class="shezhi">账户设置 <i></i></li>
+					<li class="shequ">社区 <i></i></li>
+					<li class="xiaoxi">消息 <i>11</i></li>
+				</ul>
+				<!-- 搜索框以及购物车 -->
+				<div class="top_search02">
+					<div class="top_search_center">
+						<form action="index.php">
+						<div class="input">
+							<input type="hidden" name="m" value="shop">
+							<input type="hidden" name="a" value="show">
+							<input type='text' name="search" class='input1' value="<?php echo $sousuo; ?>" placeholder="请输入商品">
+							<input type='submit'  value="搜索" class='input2'>			
+						</div>			
+					
+						</form>
+						
+					
+					</div>
+					<div class="top_search_right">
+						<div class="carbody">
+							<i class="icon_car"></i>
+							<a class="shopcar" href="index.php?m=car&a=show">
+								我的购物车
+								<div class="shopnum">0</div>
+								>
+							</a>
+							
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>	
+	</header>
+	<div id="zhuti">
+		<div class="zhuti_body">
+			<div class="left">
+				<ul>
+					<li class="title"><a href="">
+						订单中心
+					</a></li>
+					<li><a href="">
+						我的订单
+					</a></li>
+					<li><a href="">
+						团购订单
+					</a></li>
+					<li><a href="">
+						本地生活订单
+					</a></li>
+					<li><a href="">
+						我的预售
+					</a></li>
+					<li><a href="">
+						评价订单
+					</a></li>
+					<li><a href="">
+						取消订单记录
+					</a></li>
+					<li><a href="">
+						我的常购商品
+					</a></li>
+				</ul>
+				<ul>
+					<li class="title"><a href="">
+						关注中心
+					</a></li>
+					<li><a href="">
+						我的订单
+					</a></li>
+					<li><a href="">
+						团购订单
+					</a></li>
+					<li><a href="">
+						本地生活订单
+					</a></li>
+					<li><a href="">
+						我的预售
+					</a></li>
+					<li><a href="">
+						评价订单
+					</a></li>
+					<li><a href="">
+						取消订单记录
+					</a></li>
+					<li><a href="">
+						我的常购商品
+					</a></li>
+				</ul>
+				<ul>
+					<li class="title"><a href="">
+						资产中心
+					</a></li>
+					<li><a href="">
+						我的订单
+					</a></li>
+					<li><a href="">
+						团购订单
+					</a></li>
+					<li><a href="">
+						本地生活订单
+					</a></li>
+					<li><a href="">
+						我的预售
+					</a></li>
+					<li><a href="">
+						评价订单
+					</a></li>
+					<li><a href="">
+						取消订单记录
+					</a></li>
+					<li><a href="">
+						我的常购商品
+					</a></li>
+				</ul>
+			</div>
+			<div class="right">
+				<div class="tips">
+					<a href="">支付有礼 </a><span>|</span>
+					<a href="">智能客服</a>
+				</div>
+				<div class="right_top">
+					<div class="top_one">
+						<a href="" class="touxiang"><img src="image/vip/touxiang.jpg" alt=""></a>
+						<div class="msg">
+							<h3>麦萌LOL</h3>
+							<div><i></i>铜牌会员</div>
+							<div>账户安全：</div>
+							<div>我的胸章</div>
+						</div>
+					</div>
+					<div class="top_two">
+						<div class="fukuan">
+							<a href="" class="icon4 icon">
+								<div></div>
+								待付款 <span>0</span>
+							</a>
+							<a href="" class="icon3 icon">
+								<div></div>
+								待付款 <span>0</span>
+							</a>
+							<a href="" class="icon2 icon">
+								<div></div>
+								待付款 <span>0</span>
+							</a>
+							<a href="" class="icon1 icon">
+								<div></div>
+								待付款 <span>0</span>
+							</a>
+						</div>
+						<div class="xingxi">
+							<div class="lingqian">
+								<p>余额：0.00</p>
+								<p>京豆：100</p>
+								<p>京东卡/E卡：0</p>
+								<p>优惠券：0</p>
+								<p>通信B：0</p>
+							</div>
+							<div class="baitiao">
+								<p>白条额度</p>
+								<p>10000元</p>
+								<p>实名认证：未认证</p>
+							</div>
+							<div class="shouyi">
+								<p>昨天收益（元）</p>
+								<p>0.00</p>
+								<p>小金库：0.00</p>
+								<p><a href="">转入小金库，马上赚钱</a></p>
+							</div>
+						</div>				
+					</div>
+					
+				</div>
+				<div class="right_main">
+					<div class="right_main_left">
+						<div class="zuiding"><h3>我的订单</h3>
+							<a href="">查看全部订单</a>
+						</div>
+						<div class="gouwuche">
+							<img src="image/vip/tupian.png" alt="">
+						</div>
+					</div>
+					<div class="right_main_right">
+						 <div class="huiyuantuijian">
+						 	<h3>会员推荐</h3>
+						 	<a href="">京东会员</a>
+						 	<a href="">金融会员</a>
+						 </div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	<?php include('./view/footer.html'); ?>

@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./include/js/jquery.js"></script>
+<script language="javascript">
+$(function(){	
+	//导航切换
+	$(".imglist li").click(function(){
+		$(".imglist li.selected").removeClass("selected")
+		$(this).addClass("selected");
+	})	
+})	
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".click").click(function(){ 
+  $(".tip").fadeIn(200);
+  });
+  
+  $(".tiptop a").click(function(){
+  $(".tip").fadeOut(200);
+});
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+</script>
+<style>
+    
+    #tab2 .vocation{
+        float:right;
+        position:relative;
+        top:7px;
+    }
+    #tab2 .chaxun input{
+        width:30px;
+        border:1px solid #ccc;
+    }
+    
+</style>
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">商品列表</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+     <!-- 查询模块 -->
+    <form action="./index.php" method="get" id="tab2">
+        <ul class="seachform">
+        <input type="hidden" name="m" value="order">
+        <input type="hidden" name="a" value="show">
+
+
+            <li><label>精准查询</label>
+                <input name="search" type="text" class="scinput" value="<?php echo $sousuo;?>" placeholder="请输入商品订单号"/>
+            </li>
+            <li><label>按会员查询</label>
+                <input name="vipid" type="text" class="scinput" value="<?php echo $vipid;?>" placeholder="请输入会员ID号"/>
+            </li>
+           
+            <li><label>所属类别:</label>  
+            <div class="vocation" >
+            <select class="select3" name="lev" style="border:1px solid #ccc;">
+            <option value=""  >&nbsp;&nbsp;全部</option>
+            <option value="0"  >&nbsp;&nbsp;新订单</option>
+            <option value="1"  >&nbsp;&nbsp;已发货</option>
+            <option value="2"  >&nbsp;&nbsp;已收货</option>
+            <option value="3"  >&nbsp;&nbsp;无效订单</option> 
+           
+            </select>
+            </div>
+            </li>
+            
+            <li><label>价格区间:</label>  
+            <div class="vocation chaxun" >
+                <input type="num" name="num1" value="<?php echo $num1; ?>">~
+                <input type="num" name="num2" value="<?php echo $num2;   ?>">
+               
+            </div>
+            </li>
+            
+             <li ><a href="index.php?m=order&a=show" ><label style="background:#ccc; display:block; width:60px;text-align:center;padding-left:8px;">重新查询</label></a></li>
+            <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+            <li><label>&nbsp;</label><input name="" type="reset" class="scbtn" value="重置"/></li>
+
+        </ul>
+    </form>
+    
+    <div class="tools">
+        
+    	<ul class="toolbar">
+    <!-- 添加按钮 -->
+       <!--  <a href="./index.php?m=goods&a=add"><li class="click"><span><img src="./include/images/t01.png" /></span></li></a> -->
+    <!-- 多条删除按钮 -->
+        <li><span><input type="image" src="./include/images/t03.png" form='myform'></span></li>
+        </ul>
+        
+        
+        <ul class="toolbar1">
+        <li><span><img src="./include/images/t05.png" /></span>设置</li>
+        </ul>
+    
+    </div>
+    
+    
+    <table class="imgtable" id="ulist">
+        <?php 
+                
+                if(!empty($_GET['order']) && substr($_GET['order'],-4)=='desc'){
+                    $porder = 'total asc';
+                   
+                    $corder = 'addtime asc'; 
+                    $torder = 'status asc';
+                }else{
+                    $porder = 'total desc';
+                    
+                    $corder = 'addtime desc'; 
+                    $torder = 'status desc';
+                }
+
+           ?> 
+    <thead>
+    <tr>
+     <th><input name="" type="checkbox" value="" id="maincheck"/></th> <!-- 这里是控制全选按钮 -->
+   
+    <th width="100px;">缩略图</th>
+    <th>订单号</th>
+    <th>商品名称和ID</th>
+    <!-- 正反排序 -->
+    <th><a href=" ?m=order&a=show&order=<?php echo $porder;?>&page=<?php echo $page->page; echo $search; echo $searchlev; echo $qujian; echo $searchvip;?>">总金额<i class="sort"><img src="./include/images/px.gif" /></i></a></th>
+   
+
+    <th>邮编</th>
+
+    <th><a href=" ?m=order&a=show&order=<?php echo $corder;?>&page=<?php echo $page->page; echo $search; echo $searchlev; echo $qujian; echo $searchvip;?>">交易时间<i class="sort"><img src="./include/images/px.gif" /></i></a></th>
+
+    <th><a href=" ?m=prder&a=show&order=<?php echo $torder;?>&page=<?php echo $page->page; echo $search; echo $searchlev; echo $qujian; echo $searchvip;?>">订单状态<i class="sort"><img src="./include/images/px.gif" /></i></a></th>
+    <th>操作</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    <!-- 加i标签会变红 -->
+   <form action="./index.php?m=order&a=dels" method="post" id='myform'>  
+<?php 
+    $sta = array('新订单','已发货','已收货','无效订单');
+
+    if(isset($res) && !empty($res)){
+        foreach($res as $k=>$v){
+
+        $time = date('Y-m-d H:i:s',$v['addtime']);
+        $str = <<<EOF
+          <tr align="center" >
+          <td><input name='dels[]' type='checkbox' value='{$v['id']}' class='check'/></td>
+           
+          <td class="imgtd"><a href='./index.php?m=goods&a=add&id={$v['id']}' class='tablelink'><img src="./uploadimg/goods/{$goods[$orderinfo[$v['id']]['goodsid']]['pic']}" width="80" height="60"/></a></td>
+            <td ><p>ID: {$v["id"]}</p></td>
+            <td>{$orderinfo[$v['id']]['name']}<p></p></td>
+
+           
+            <td >￥{$v["total"]}</td>
+              
+            <td>{$v["code"]}</td> 
+            <td >{$time}</td> 
+            <td>{$sta[$v["status"]]}</td>
+            <td><a href='./index.php?m=order&a=update&id={$v['id']}' class='tablelink'>修改/查看详细</a>&nbsp;&nbsp; <a href='./index.php?m=order&a=dels&id={$v['id']}' class='tablelink'> <i> 删除</i></a></td>
+    
+            </tr>
+EOF;
+echo $str;
+        }
+        
+    }
+    
+?>
+    </form>
+    
+    
+    </tbody>
+    
+    </table>
+    
+     <!-- 这里把排序条件赋给变量 方便翻页 -->
+    <?php
+        $order='';
+        if(isset($_GET['order'])){
+            $order = '&order='.$_GET['order'];
+        }
+    ?>
+    
+
+   <div class="pagin">
+
+    <!-- 分页 -->
+        <div class="message">共<i class="blue"><?php echo $page->allpage;?></i>页，当前显示第&nbsp;<i class="blue"><?php echo $page->page; ?>&nbsp;</i>页</div>
+
+        <ul class="paginList"> 
+        <!-- 首页 -->
+        <?php
+            
+                echo '<li class="paginItem">
+                <a href=" ?m=order&a=show&page=1'.$search.$searchlev.$qujian.$order.$searchvip.'">'.'首'.'</a></li>';
+        
+        ?>
+         <!-- 上一页 -->
+        <li class="paginItem"><a href=" ?m=order&a=show&page=<?php echo $page->prepage; echo $search; echo $searchlev; echo $qujian; echo $order; echo $searchvip;?>"><span class="pagepre"></span></a></li>
+        <!-- 页码显示 -->
+        <?php
+       
+            for($i=1;$i<=$page->allpage;$i++){
+                echo '<li class="paginItem">
+                <a href=" ?m=order&a=show&page='.$i.''.$search.$searchlev.$qujian.$order.$searchvip.'">'.$i.'</a></li>';
+            }
+        
+        ?>
+        <!-- 下一页 -->
+        <li class="paginItem"><a href=" ?m=order&a=show&page=<?php echo $page->nextpage; ?><?php echo $search; echo $searchlev; echo $qujian;echo $order;echo $searchvip;?>"><span class="pagenxt"></span></a></li>
+
+        <!-- 尾页 -->
+        <?php
+            
+                echo '<li class="paginItem">
+                <a href=" ?m=order&a=show&page='.$page->allpage.''.$search.$searchlev.$qujian.$order.$searchvip.'">'.'尾'.'</a></li>';
+        
+        ?>
+
+        </ul>
+
+    </div>
+    
+    
+
+    <!-- </div>
+    
+    <div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="./include/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div> -->
+    
+<script type="text/javascript">
+	$('.imgtable tbody tr:odd').addClass('odd');
+    var omain = document.getElementById('maincheck');
+    var list = document.getElementById('ulist');
+    var checks = list.getElementsByClassName('check');
+     omain.onclick=function(){
+        if(omain.checked){
+            for($i=0;$i<checks.length;$i++){
+                checks[$i].checked = true;
+            }
+        }else{
+            for($i=0;$i<checks.length;$i++){
+                checks[$i].checked = false;
+            }
+        }
+     }   
+
+
+	</script>
+    
+</body>
+
+</html>
+

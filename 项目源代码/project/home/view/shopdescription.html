@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商品详情页</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	<link rel="stylesheet" href="./include/css/shopdescription.css">
+	<link rel="stylesheet" href="./include/css/footer.css">
+</head>
+<body>
+	<header id="header">
+	<div class="head">
+		<!-- <div class="logo_big"><img src="./include/image/index/logo_big.png" alt=""></div> -->
+		<div class="head_top">
+
+			<div class="sign">
+				<div class="beijing"><a href="">北京</a></div>
+				<?php
+
+					//判断是否登录	
+					if(isset($_SESSION['god']) && $_SESSION['god']['islogin']==true){
+						$username = '亲爱的'.$_SESSION['god']['level'];
+						$dengji = $_SESSION['god']['name'];
+						$a = 'info';
+						$sign = 'info';
+					}else{
+						$username = '你好,请登录';
+						$a = 'login';
+						$dengji = '免费注册';
+						$sign = 'sign';
+					}
+
+				?>
+				<div class="nihao"><a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $username; ?></div>
+			</div>
+			<div class="top_list">
+				<ul>
+					<li ><a href="index.php?m=user&a=<?php echo $sign; ?>" style="color:#f10215"><?php echo $dengji; ?></a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=order&a=show">我的订单</a></li>
+					<li class="top_list_fuhao"><span>|</span></li> 
+					<li class="top_list_word"><a href="index.php?m=info&a=show">我的京东</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="#">京东会员</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="#">企业采购</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li class="top_list_word"><a href="#">客户服务</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li class="top_list_word"><a href="#">网站导航</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=user&a=out">退出登录</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="search_nav">
+		<div class="top_search">
+			<a class="logo_shop" href="index.php">
+				<img src="./include/image/shopdescription/logo_shop.png" alt="">
+			</a>
+			<div class="top_search02">
+				<div class="top_search_center">
+					<form action="index.php">
+						<div class="input">
+							<input type="hidden" name="m" value="shop">
+							<input type="hidden" name="a" value="show">
+							<input type='text' name="search" class='input1' value="<?php echo $sousuo; ?>" placeholder="请输入商品">
+							<input type='submit'  value="搜索" class='input2'>			
+						</div>			
+					
+						</form>
+					<div class="top_search_word">
+						
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+						
+					</div>
+				
+				</div>
+				<div class="top_search_right">
+					<div class="carbody">
+							<i class="icon_car"></i>
+							<a class="shopcar" href="index.php?m=car&a=show">
+								我的购物车
+								<div class="shopnum">0</div>
+								>
+							</a>
+							
+						</div>
+				</div>
+			</div>
+		</div>
+		<div class="top_nav">
+			<div class="top_nav_list">
+				<a href="index.php?m=shop&a=show" class="quanbushangpin">
+					全部商品分类    &nbsp&nbsp&nbsp&nbsp>
+				</a>
+				<ul>
+					<li><a href="">秒杀</a></li>
+					<li><a href="">优惠券</a></li>
+					<li><a href="">闪购</a></li>
+					<li><a href="">拍卖</a></li>
+					<li class="top_nav_fuhao"><span>|</span></li>
+					<li><a href="">服装城</a></li>
+					<li><a href="">京东超市</a></li>
+					<li><a href="">生鲜</a></li>
+					<li><a href="">全球购</a></li>
+					<li class="top_nav_fuhao"><span>|</span></li>
+					<li><a href="">京东金融</a></li>
+				</ul>
+
+			</div>
+		</div>
+	</div>	
+	</header>
+	<div id="main">
+		<div class="shop_top">
+			<div class="shop_top_item">
+				<ul>
+					<li><a href="">运动户外</a><span>></span></li>
+					<li><a href="">运动鞋包</a><span>></span></li>
+					<li><a href="">跑步鞋</a><span>></span></li>
+					<li><a href="">NIKE耐克</a><span>></span></li>
+					<li><a href="">耐克818099-001</a></li>
+				</ul>
+				<div class="guanzhu">
+					<a href="" class="">Nike耐克京东自营店</a>
+					<a href="" class="ziying">京东自营</a>
+					<a href="" class="dianming"><i></i>jimi</a>
+					<a href="" class="dianpu"><i></i>关注店铺</a>
+					<a href="" class="weidian"><i></i>微店</a>
+				</div>
+			</div>
+		</div>
+		<div class="main_body">			
+			<div class="main_body_left">
+				<div class="left_img">
+					<img src="../admin/uploadimg/goods/<?php echo $row['pic']; ?>" width="348px" height="400px">
+				</div>
+				<div class="left_zhanshi">
+					<ul>
+						<li class="leftjiantou"></li>
+						<li><img src="../admin/uploadimg/goods/<?php echo $row['pic'];?> " alt="" width="50px" height="50px"></li>
+						<li><img src="../admin/uploadimg/goods/<?php echo $row['pic'];?> " alt="" width="50px" height="50px"></li>
+						<li><img src="../admin/uploadimg/goods/<?php echo $row['pic'];?> " alt="" width="50px" height="50px"></li>
+						<li><img src="../admin/uploadimg/goods/<?php echo $row['pic'];?> " alt="" width="50px" height="50px"></li>
+						<li><img src="../admin/uploadimg/goods/<?php echo $row['pic'];?> " alt="" width="50px" height="50px"></li>
+						<li class="rightjiantou"></li>
+					</ul>
+				</div>
+				<div class="left_fenxiang">
+					<a href="" class="fenx"><i></i>分享</a>
+					<a href="" class="gz"><i></i>关注商品</a>
+					<a href="" class="jubao"><i></i>举报</a>
+				</div>
+			</div>
+			<div class="main_body_center">
+				<div class="title">
+					<div class="title_left">
+						<h3>
+						<?php 
+
+							echo $row['name'].'　'.$row['descr'];
+		
+						?>
+						</h3>
+						<p><?php echo $row['company']; ?></p>
+					</div>
+					<!-- <div class="title_right">
+						<span></span>
+					</div> -->
+				</div>	
+				<div class="qiang"><img src="./include/image/shopdescription/qiang.png" width="580px"></div>
+				<div class="price" >
+					<div class="miaosha">
+						<b>秒 杀 价：<font color="#E4393C" size="5" weight="bold">￥<?php echo $row['price'];?></font></b> [<del>反正原来很贵</del>] <a href="" style="color:blue">( 降价通知 )</a>
+					</div>
+					<!-- <div class="cuxiao">
+						<b>促销信息：</b><span>限购</span>购买1-10件时享受优惠，超出数量以结算价为准
+					</div> -->
+					<div class="peisong">
+						<b>配送至：</b><span>限购</span>有货，支持 99元免基础运费(10kg内)  |  货到付款
+					</div>
+					<div class="fuwu">
+						<b>服务：</b>由 京东 发货，九阳厨房电器旗舰店提供售后服务。23:00前完成下单,预计明天(01月05日)送达
+
+					</div>
+					<div><b>重　　量</b>：2.58kg</div>
+				</div>
+				<form action="index.php?m=car&a=addcar&id=<?php echo $row['id']; ?>" method="post">
+				<div class="xuanze">
+						<div class="color">
+							<div class="words">选择颜色：</div>
+							
+								<a>
+									<i><img src="./include/image/shopdescription/color01.jpg"></i><span>流光金</span>
+								</a>
+								<a>
+									<i><img src="./include/image/shopdescription/color01.jpg"></i><span>流光金</span>
+								</a>
+								<a>
+									<i><img src="./include/image/shopdescription/color01.jpg"></i><span>流光金</span>
+								</a>
+						</div>
+					
+					
+						<div class="baozhang">
+							<div class="words">增值保障：</div>
+								<a>
+									<span>碎屏两年保险</span>
+								</a>
+								<a>
+									<span>碎屏两年保险</span>
+								</a>
+								<a>
+									<span>碎屏两年保险</span>
+								</a>
+						</div>
+					
+						<div class="taozhuang">
+							<div class="words">选择套装：</div>	
+							<a>
+									<span>耳机套装</span>
+							</a>
+							<a>
+									<span>保护套装</span>
+							</a>
+							<a>
+									<span>阅读套装</span>
+							</a>							
+						</div>
+					
+						<div class="baitiao">
+							<div class="words">白条分期：</div>	
+							<a>
+									<span>30天免息</span>
+							</a>
+							<a>
+									<span>20天免息</span>
+							</a>
+							<a>
+									<span>10天免息</span>
+							</a>
+							<a>
+									<span>5天免息</span>
+							</a>
+							<a>
+									<span>0天免息</span>
+							</a>
+						</div>
+						<div class="baitiao">
+							<div class="words">商品库存：</div>	
+							<a>
+									<span><?php echo $row['store']; ?>件</span>
+							</a>
+						</div>
+				</div>	
+				<div class="goumai">
+				
+						<input type="number" class="number" name="addnum" value="1" min='1' max="<?php echo $row['store']; ?>">
+
+						<input type="submit" class="submit" value="">	
+				</form>
+					
+					
+				</div>
+				<p>温馨提示：支持7天无理由退货</p>
+			</div>
+			<div class="main_body_right">
+				<div class="shop_logo">
+					<img src="./include/image/shopdescription/shop_logo.jpg" alt="">
+				</div>
+				<div class="other">
+					<a href="">联系供应商</a>
+					<a href="">进店逛逛</a>
+					
+				</div>
+				
+				<div class="fuwulei">
+					<p>服务支持</p>
+					<a href="">精准大</a>
+					<a href="">夜间配</a>
+					<a href="">自提</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="zuhe">
+		<div class="zuhetaocan">
+			<div class="zuhetaocan_top">
+				<a href="">推荐配件</a>
+				<a href="">优惠套装</a>
+				<a href="">最佳组合</a>
+			</div>
+			<div class="taocan_list">
+				<ul>
+					<li>
+						<a href=""><img src="./include/image/shopdescription/shop_list.jpg" alt="">
+							<p >荣事达(Royalstar)电火锅韩式家用多功能4L</p>
+						</a>
+						<p class="miaoshu">￥99.00</p>	
+					</li>
+					<li>
+						<a href=""><img src="./include/image/shopdescription/shop_list.jpg" alt="">
+							<p >荣事达(Royalstar)电火锅韩式家用多功能4L</p>
+						</a>
+						<p class="miaoshu">￥99.00</p>	
+					</li>
+					<li>
+						<a href=""><img src="./include/image/shopdescription/shop_list.jpg" alt="">
+							<p >荣事达(Royalstar)电火锅韩式家用多功能4L</p>
+						</a>
+						<p class="miaoshu">￥99.00</p>	
+					</li>
+					<li>
+						<a href=""><img src="./include/image/shopdescription/shop_list.jpg" alt="">
+							<p >荣事达(Royalstar)电火锅韩式家用多功能4L</p>
+						</a>
+						<p class="miaoshu">￥99.00</p>	
+					</li>
+					<li>
+						<a href=""><img src="./include/image/shopdescription/shop_list.jpg" alt="">
+							<p >荣事达(Royalstar)电火锅韩式家用多功能4L</p>
+						</a>
+						<p class="miaoshu">￥99.00</p>	
+					</li>
+					<li>
+						<a href=""><img src="./include/image/shopdescription/shop_list.jpg" alt="">
+							<p >荣事达(Royalstar)电火锅韩式家用多功能4L</p>
+						</a>
+						<p class="miaoshu">￥99.00</p>	
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	

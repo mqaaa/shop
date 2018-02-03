@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+    
+    select{
+        width:200px;
+        height:40px;
+        border:1px solid #ccc;
+        margin-top:10px;
+    }
+</style>
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">表单</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span><?php  echo $title; ?></span></div>
+    <form action="index.php?m=goods&a=<?php echo $method; ?>" method="post" enctype="multipart/form-data">
+        <ul class="forminfo">
+       
+               <?php
+                if(isset($_GET['id'])){
+
+                    echo '<input type="hidden" name="id" value="'.$_GET['id'].'"/>';
+                }
+                ?>
+            <li><label>商品名称</label><input name="name" type="text" class="dfinput" value="<?php echo isset($goods[0]['name'])?$goods[0]['name']:''; ?>" required placeholder="请输入最多13个字" maxlength="13"/><b>*</b><i>请输入最多13个字</i></li>
+               
+
+            <li><label>所属类别</label>
+                <select name="typeid" id="level" style="position:relative;top:-10px;" required>
+                     <option value="xz" disabled>&nbsp;&nbsp;--请选择分类--</option>
+                 <?php 
+                
+                   if(isset($lanmu) && count($lanmu)>0){
+                        foreach($lanmu as $k=>$v){
+                            //父亲的路径加父亲的ID
+                            //判断逗号出现的次数
+                            $num = substr_count($v['path'],',');
+                            $span = str_repeat('　',$num-1);
+                            
+                            if($v['id'] == $goods[0]['typeid']){
+                                echo '<option value="'.$v['id'].'"  selected>&nbsp;&nbsp;'.$span.$v['name'].'</option>';
+                            }elseif($v['id'] == 0){
+                                echo '<option value="'.$v['id'].'" disabled >&nbsp;&nbsp;'.$span.$v['name'].'</option>';
+                            }elseif($num==1 ){
+                                echo '<option value="'.$v['id'].'"  disabled>&nbsp;&nbsp;'.$span.$v['name'].'</option>';
+                            }else{
+                                 echo '<option value="'.$v['id'].'"  >&nbsp;&nbsp;'.$span.$v['name'].'</option>';
+                            }
+                            
+                        }
+                   }
+                    
+                    
+                ?>    
+                    
+                  
+                </select> <b>*</b> 
+                
+            </li>
+
+           
+            <li><label>商品价格</label><input name="price" pattern="[\d]{1,9}(.\d{1,2})?" type="text" class="dfinput" value="<?php echo isset($goods[0]['price'])?$goods[0]['price']:''; ?>"  required placeholder="请输入价格,最多两位小数 如 9 / 9.9 / 9.99" maxlength="9"/><b>*</b><i>请输入合法的价格</i></li>
+
+            <li><label>商品图片</label><input name="pic" type="file" class="dfinput"  style="line-height:30px;" <?php echo $bixu; ?>/><b>*</b><i>请上传图片进行修改</i></li>
+            <li><label>生产厂家</label><input name="company" type="text" class="dfinput" value="<?php echo isset($goods[0]['company'])?$goods[0]['company']:''; ?>"  required placeholder="请写明厂家"/><b>*</b><i>多个关键字用,隔开</i></li>
+           <?php
+                $new = $now = $gtime = '';
+                if(isset($goods[0])){
+                        if($goods[0]['state']==0){
+                                $new = 'checked';
+                        }elseif($goods[0]['state']==1){
+                                $now = 'checked';
+                        }else{
+                                $gtime = 'checked';
+                        }
+                }
+
+           ?>
+            <li><label>商品状态</label><cite>
+            <input name="state" type="radio" value="0" <?php echo $new; ?> />新添加&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name="state" type="radio" value="1"  <?php echo $now; ?>/>在售　
+            <input name="state" type="radio" value="2" <?php echo $gtime;?>/>下架
+           <b>*</b> </cite></li>
+
+            <li><label>库存量</label><input name="store" type="number" class="dfinput" value="<?php echo isset($goods[0]['store'])?$goods[0]['store']:''; ?>" required placeholder="请填写库存量" pattern="\d+"/><b>*</b></li>
+
+            <li><label>被购买数量</label><input name="num" type="number" class="dfinput" value="<?php echo isset($goods[0]['num'])?$goods[0]['num']:''; ?>" disabled placeholder="不可选,默认为0"/></li>
+
+            <li><label>点击量</label><input name="clicknum" type="number" class="dfinput" value="<?php echo isset($goods[0]['clicknum'])?$goods[0]['clicknum']:''; ?>" disabled placeholder="不可选,默认为0"/></li>
+
+            <li><label>添加时间</label><input name="addtime" type="text" class="dfinput" value="<?php echo isset($goods[0]['addtime'])?date('Y-m-d H:i:s',$goods[0]['addtime']):''; ?>" readonly placeholder="不可选,默认为当前"/></li>
+
+            <li><label>商品介绍</label><textarea name="descr" id="" cols="50" rows="5" style="border:solid 1px #a7b5bc;" required maxlength="50"><?php echo isset($goods[0]['descr'])?$goods[0]['descr']:'请对商品简单描述,不能超过50个字'; ?></textarea><b>*</b><i>不能超过50个字</i></li>
+            <input type="hidden" name="img" value="<?php 
+                            if(isset($goods[0])){
+                                $pics = $goods[0]['pic'];
+                               
+                            }else{
+                                $pics = '';
+                            }
+                             echo $pics;
+                         ?>">
+                
+           <!--  <li><label>文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea></li> -->
+            <li><label>&nbsp;</label><input type="submit" class="btn" value="确认提交"/></li>
+        </ul>
+    </form>
+    
+        <div style="width:200px;overflow:hidden;border:4px double #ccc; position:fixed; right:100px; top:100px; text-align:center; box-shadow:3px 4px 2px #ccc;">
+        <h2 style="font: bold 20px Georgia,serif; padding:10px 0;">商品图片</h2>
+        <div style="margin-top:10px;"> <img src="./uploadimg/goods/<?php echo $pics; ?>" alt="请上传商品图片" width="200px"/></div>
+           
+        </div>
+                
+    </div>
+
+
+</body>
+
+</html>

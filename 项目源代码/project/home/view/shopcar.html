@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>购物车</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	<link rel="stylesheet" href="./include/css/shopcar.css">
+	<link rel="stylesheet" href="./include/css/footer.css">
+</head>
+<body>
+	<header id="header">
+	<div class="head">
+		<!-- <div class="logo_big"><img src="./include/image/index/logo_big.png" alt=""></div> -->
+		<div class="head_top">
+
+			<div class="head_top">
+
+			<div class="sign">
+				<div class="beijing"><a href="">北京</a></div>
+				<?php
+
+					//判断是否登录	
+					if(isset($_SESSION['god']) && $_SESSION['god']['islogin']==true){
+						$username = '亲爱的'.$_SESSION['god']['level'];
+						$dengji = $_SESSION['god']['name'];
+						$a = 'info';
+						$sign = 'info';
+					}else{
+						$username = '你好,请登录';
+						$a = 'login';
+						$dengji = '免费注册';
+						$sign = 'sign';
+					}
+
+				?>
+				<div class="nihao"><a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $username; ?></div>
+			</div>
+			<div class="top_list">
+				<ul>
+					<li ><a href="index.php?m=user&a=<?php echo $sign; ?>" style="color:#f10215"><?php echo $dengji; ?></a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=order&a=show">我的订单</a></li>
+					<li class="top_list_fuhao"><span>|</span></li> 
+					<li class="top_list_word"><a href="index.php?m=info&a=show">我的京东</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="#">京东会员</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="#">企业采购</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li class="top_list_word"><a href="#">客户服务</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li class="top_list_word"><a href="#">网站导航</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=user&a=out">退出登录</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="search_nav">
+		<div class="top_search">
+			<a class="logo_shop" href="index.php">
+				<img src="./include/image/shopcar/logo_right.jpg" alt="">
+			</a>
+			<div class="top_search02">
+				<div class="top_search_center">
+					<form action="index.php">
+						<div class="input">
+							<input type="hidden" name="m" value="shop">
+							<input type="hidden" name="a" value="show">
+							<input type='text' name="search" class='input1' value="<?php echo $sousuo; ?>" placeholder="请输入商品">
+							<input type='submit'  value="搜索" class='input2'>			
+						</div>			
+					
+						</form>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>	
+	</header>
+	<!-- 购物车主体 -->
+	<div id="shoplist">
+		<div class="shoplist1">
+			<div class="shop_top">
+				<h3>全部商品</h3>
+				<h3>京东大药房</h3>
+				<div>配送至：<span>太原科技大学</span></div>
+			</div>
+			
+			<div class="chaqu"></div>	
+<form action="index.php?m=order&a=jiesuan" id="submits" method="post">
+
+			<table class="shop_body" cellspacing="0" id="ulist">
+    
+				<tr class="headshop">
+					<td class="xuanze">
+						<input type="checkbox" id="maincheck">全选
+	
+					</td>
+					<td class="shangpin">
+						商品
+					</td>
+					<td class="danjia">
+						单价
+					</td>
+					<td class="shuliang">
+						数量
+					</td>
+					<td class="xiaoji">
+						小计
+					</td>
+					<td class="caozuo">
+						操作
+					</td>
+				</tr>
+<?php
+$total = $allnum = 0;
+if(isset($_SESSION['car']) && count($_SESSION['car'])>0){
+	
+	//var_dump($_SESSION);//因为购买的商品存在session中 so遍历session的值
+		foreach($_SESSION['car'] as $k=>$v){
+			$price = $v['addnum']*$v['price'];
+			$allnum += $v['addnum'];
+			$total += $price;
+			$store = $v['store']>0?$v['store'].'件':'无货';
+			$str = <<<EOF
+		
+				<tr class="shopmsg">
+					<td >
+						<input type="checkbox" class="check" name="ids[]" value="{$v['id']}" >
+					</td>
+					<td >
+						<div class="shopxiangqing">
+							<div class="shop01">
+								<img src="../admin/uploadimg/goods/{$v['pic']}" width="82px" height="82px">
+							</div>
+							<a href="">{$v['name']} <br> {$v['descr']}</a>
+						</div>
+					</td>
+					<td >
+						<span style="color: red;">¥{$v['price']}</span>
+					</td>
+					<td >
+						<div class="number">
+							<a href="index.php?m=car&a=setnum&id={$v['id']}&addnum=-1" class="jian">-</a>
+							<input type="text" value="{$v['addnum']}" readonly>
+							<a href="index.php?m=car&a=setnum&id={$v['id']}&addnum=1" class="jia">+</a>
+							<b>库存：{$store}</b>
+						</div>
+						
+					</td>
+					<td class="xiaoji">
+						<p><b>¥{$price}</b></p>
+						<p></p>
+						<p>3.6kg</p>
+					</td>
+					<td >
+						<p><a href="index.php?m=car&a=delcar&id={$v['id']}">删除</a></p>
+						<p><a href="">到货通知</a></p>
+						<p><a href="">移到我的关注</a></p>
+					</td>
+				</tr>
+
+
+EOF;
+
+			echo $str;
+		}
+
+
+
+}else{
+	echo '<tr><td colspan="6" align="center" height="100px">购物车空空如也，<a href="index.php?m=shop&a=show">点我去购买</a></td></tr>';
+}
+
+
+
+?>				
+				
+				
+				<tr height="20px"></tr>
+				<tr class="shopmsg2">
+					<td class="quanxuna"><input type="checkbox" id="main2check">全选</td>
+					<td colspan="5" class="shanchu" >					
+						<div class="jiesuan1">
+						<!-- <form action="index.php?m=car&a=delcar" method="post" id="" style="display:inline;" >
+							
+						</form>		 -->			
+							<input type="submit"  formaction="index.php?m=car&a=delcar" method="post" value="删除选中/清空购物车">
+							&nbsp;<a href="">移到我的关注</a>
+							&nbsp;<a href="index.php?m=car&a=removeout">清除下柜商品</a>
+							
+							
+						</div>
+	
+						<div class="jiesuan2">
+							<div class="shuliang">
+								已选择<b><?php echo $allnum; ?></b>件商品
+							</div>
+							<div class="zongjia">
+								  <div>总价：<h2 style="display: inline;"><b style="color: red;">¥ <?php echo $total; ?></b></h2></div>  
+								已节省： -¥<b>0.00</b>
+							</div>
+							
+								<input type="submit"  class="fukuan2" value="去结算">
+
+</form>
+							
+						</div>
+					</td>
+				</tr>
+			</table>
+			
+		</div>
+	</div>
+	
+	<script>
+
+		var omain = document.getElementById('maincheck');
+		var omain2 = document.getElementById('main2check');
+		console.log(omain2);
+	    var list = document.getElementById('ulist');
+	    var checks = list.getElementsByClassName('check');
+	     omain.onclick=function(){
+	        if(omain.checked){
+	            for($i=0;$i<checks.length;$i++){
+	                checks[$i].checked = true;
+	            }
+	        }else{
+	            for($i=0;$i<checks.length;$i++){
+	                checks[$i].checked = false;
+	            }
+	        }
+	     }   
+	     omain2.onclick=function(){
+	        if(omain2.checked){
+	            for($i=0;$i<checks.length;$i++){
+	                checks[$i].checked = true;
+	            }
+	        }else{
+	            for($i=0;$i<checks.length;$i++){
+	                checks[$i].checked = false;
+	            }
+	        }
+	     }   
+	</script>
+</body>
+</html>

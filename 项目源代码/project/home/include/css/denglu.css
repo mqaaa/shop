@@ -1,0 +1,317 @@
+
+*{
+	padding:0;
+	margin:0;
+}
+body{
+	background: #fff;
+}
+ a{
+	text-decoration:none;
+	color:#999;
+	font-size: 12px;
+}
+a:hover{
+	color: #f10215;
+}
+ li{
+	list-style:none;
+}
+/*头部*/
+#header{
+	width: 100%;
+	height: 80px;
+	overflow: hidden;
+}
+#header .head{
+	width: 990px;
+	height: 60px;
+	margin: 10px auto;
+	
+} 
+#header .head .logo{
+	display: block;
+	float: left;
+	
+}
+#header .head .word1{
+	display: block;
+	float: left;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+#header .head .head_word1{
+	width: 110px;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 20px;
+	background: url(../image/denglu/icon_dian.png) no-repeat;
+	background-position: 0 8px; 
+	font-size: 13px;
+	display: block;
+	float: right;
+	margin-top: 37px;
+	letter-spacing: -1px;
+	
+}
+#header .head .head_word1:hover{
+	text-decoration: underline;
+}
+/*主体*/
+#main{
+	width: 100%;
+	height: 475px;
+	background: #041423;
+	overflow: hidden;
+}
+#main .main_body{
+	width: 990px;
+	height: 475px;
+	margin:0 auto;
+	background: url(../image/denglu/denglu_bg.jpg) no-repeat;
+}
+#main .main_body .denglu{
+	width: 346px;
+	height: 361px;
+	background: #fff;
+	float: right;
+	margin-top: 40px;
+}
+#main .main_body .denglu .input{
+	width: 306px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+	position: relative;
+}
+/*扫码*/
+#main .main_body .denglu .input .title .scan_h3 .scan{
+	display: none;
+	width: 307px;
+	height: 257px;
+	background: #fff;
+	position: absolute;
+	top: 55px;
+	left: 0;
+	right: 0;
+	margin:auto;
+}
+#main .main_body .denglu .input .title .scan_h3 .scan img{
+	display: block;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	right: 0;
+	margin:auto;
+}
+/*登录框*/
+#main .main_body .denglu .input .title{
+	width: 306px;
+	height: 55px;
+	overflow: hidden;
+	border-bottom:1px solid #F4F4F4; 
+}
+#main .main_body .denglu .input .title h3{
+	display: inline-block;
+	width: 140px;
+	height: 55px;
+	line-height: 55px;
+	float: left;
+	text-align: center;
+	margin-left: 5px;
+}
+#main .main_body .denglu .input .title h3.scan_h3:hover .scan{
+	display: block;
+	z-index: 99;
+}
+#main .main_body .denglu .input .title h3:hover{
+	color: #b61d1d;
+}
+/*登录框*/
+#main .main_body .denglu .input .tips{
+	width: 306px;
+	height: 23px;
+	line-height: 23px;
+	
+	background: #FEF4E5; 
+	font-size: 13px;
+	margin-top: 5px;
+	position: absolute;
+	top: 55px;
+	left: 0px;
+}
+#main .main_body .denglu .input .tips i{
+	display: inline-block;
+	width: 17px;
+	height: 17px;
+	background: url(../image/denglu/sprite2.png) no-repeat;
+	background-position: -102px -22px;
+	float: left;
+	margin-top: 2px;
+	margin-left: 10px;
+	margin-right: 10px;
+	
+}
+#main .main_body .denglu .input .input2,
+#main .main_body .denglu .input .input1{
+	width: 304px;
+	height: 40px;
+	position: relative;
+	border:1px solid #BDBDBD;
+	margin: 20px auto;
+}
+#main .main_body .denglu .input .input1{
+	margin-top: 30px;
+}
+#main .main_body .denglu .input .input1 i{
+	display: block;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: url(../image/denglu/sprite2.png) no-repeat;
+	background-position: 0 -46px;
+}
+#main .main_body .denglu .input .input2 i{
+	display: block;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: url(../image/denglu/sprite2.png) no-repeat;
+	background-position: -47px -47px;
+}
+#main .main_body .denglu .input .input2 .input_pswd,
+#main .main_body .denglu .input .input1 .input_user{
+	width: 253px;
+	height: 38px;
+	padding-left: 50px;
+	border: 0;
+	outline: 0;
+	font-size: 14px;
+}
+#main .main_body .denglu .zidong{
+	width: 306px;
+	height: 18px;
+	margin-top: 20px;
+}
+#main .main_body .denglu .zidong .zidongdenglu{
+	width: auto;
+	height: 18px;
+	line-height: 18px;
+	float: left;
+	font-size: 13px;
+}
+#main .main_body .denglu .zidong a{
+	display: block;
+	width: auto;
+	height: 18px;
+	line-height: 18px;
+	float: right;
+}
+#main .main_body .denglu .tijiao{
+	width: 306px;
+	height: 34px;
+	margin-top: 20px;
+}
+#main .main_body .denglu .tijiao input{
+	width: 304px;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	border: 0;
+	background:#e4393c;
+	color: #fff;
+}
+#main .main_body .denglu .other{
+	width: 306px;
+	height: 34px;
+	margin-top: 30px;
+	border-top: 1px solid #F4F4F4;
+}
+#main .main_body .denglu .other a{
+	display: block;
+	float: left;
+	margin-left: 10px;
+	height: 50px;
+	line-height: 50px;
+}
+#main .main_body .denglu .other a.zhuce{
+	float: right;
+	font-size: 14px;
+	color: #b61d1d;
+}
+#main .main_body .denglu .other a.qq i{
+	display: inline-block;
+	width: 20px;
+	margin-top: 14px;
+	height: 19px;
+	float: left;
+	background: url(../image/denglu/QQ-weixin.png) no-repeat;
+	background-position: 0 0;
+}
+#main .main_body .denglu .other a.weixin i{
+	display: block;
+	margin-top: 14px;
+	width: 20px;
+	height: 19px;
+	float: left;
+	background: url(../image/denglu/QQ-weixin.png) no-repeat;
+	background-position: -20px 0;
+}
+#main .main_body .denglu .other a.zhuce i{
+	display: block;
+	margin-top: 14px;
+	
+	width: 22px;
+	height: 19px;
+	float: left;
+	background: url(../image/denglu/sprite2.png) no-repeat;
+	background-position: -100px -72px;
+}
+
+/*底部*/
+/*#footer{
+	width: 100%;
+	height: 86px;
+	
+}
+#footer .foot{
+	width: 990px;
+	height: 86px;
+	margin: 20px auto;
+	
+	margin-top: 30px;
+
+}
+#footer .foot ul{
+	width: 770px;
+	margin:0 auto;
+	overflow: hidden;
+}
+#footer .foot ul li{
+	float: left;
+	height: 15px;
+	line-height: 15px;
+}
+#footer .foot ul li a{
+	padding-left: 5px;
+	padding-right: 5px;
+	color: #666;
+}
+#footer .foot ul li span{
+	font-size: 13px;
+	color: #666;
+}
+#footer .foot .zuidibu{
+	width: 990px;
+	height:30px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 13px;
+	color: #666;
+}*/

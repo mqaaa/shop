@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的订单</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	<link rel="stylesheet" href="./include/css/dingdan.css">
+	<link rel="stylesheet" href="./include/css/footer.css">
+</head>
+<body>
+	<header id="header">
+		<div class="head">
+			
+			<div class="head_top">
+
+				<div class="sign">
+				<div class="beijing"><a href="">北京</a></div>
+				<?php
+
+					//判断是否登录	
+					if(isset($_SESSION['god']) && $_SESSION['god']['islogin']==true){
+						$username = '亲爱的'.$_SESSION['god']['level'];
+						$dengji = $_SESSION['god']['name'];
+						$a = 'info';
+						$sign = 'info';
+					}else{
+						$username = '你好,请登录';
+						$a = 'login';
+						$dengji = '免费注册';
+						$sign = 'sign';
+					}
+
+				?>
+				<div class="nihao"><a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $username; ?></div>
+			</div>
+			<div class="top_list">
+				<ul>
+					<li ><a href="index.php?m=user&a=<?php echo $sign; ?>" style="color:#f10215"><?php echo $dengji; ?></a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=order&a=show">我的订单</a></li>
+					<li class="top_list_fuhao"><span>|</span></li> 
+					<li class="top_list_word"><a href="index.php?m=info&a=show">我的京东</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="#">京东会员</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="#">企业采购</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li class="top_list_word"><a href="#">客户服务</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li class="top_list_word"><a href="#">网站导航</a></li>
+						<li class="top_list_fuhao"><span>|</span></li>
+						<li ><a href="index.php?m=user&a=out">退出登录</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="search_nav">
+			<div class="top_search">
+				<!-- logo -->
+				<a class="logo_shop" href="index.php">
+					<img src="./include/image/vip/logo.png" alt="">
+					<img src="./include/image/vip/logo_right.png" alt="" class="tupian">
+				</a>
+				<ul class="nav">
+					<li>首页</li>
+					<li class="shezhi">账户设置 <i></i></li>
+					<li class="shequ">社区 <i></i></li>
+					<li class="xiaoxi">消息 <i>11</i></li>
+				</ul>
+				<!-- 搜索框以及购物车 -->
+				<div class="top_search02">
+					<div class="top_search_center">
+						<form action="index.php">
+						<div class="input">
+							<input type="hidden" name="m" value="shop">
+							<input type="hidden" name="a" value="show">
+							<input type='text' name="search" class='input1' value="<?php echo $sousuo; ?>" placeholder="请输入商品">
+							<input type='submit'  value="搜索" class='input2'>			
+						</div>			
+					
+						</form>
+						
+					
+					</div>
+					<div class="top_search_right">
+						<div class="carbody">
+							<i class="icon_car"></i>
+							<a class="shopcar" href="index.php?m=car&a=show">
+								我的购物车
+								<div class="shopnum">0</div>
+								>
+							</a>
+							
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>	
+	</header>
+	<div id="zhuti">
+		<div class="zhuti_body">
+			<div class="left">
+				<ul>
+					<li class="title"><a href="">
+						订单中心
+					</a></li>
+					<li><a href="">
+						我的订单
+					</a></li>
+					<li><a href="">
+						团购订单
+					</a></li>
+					<li><a href="">
+						本地生活订单
+					</a></li>
+					<li><a href="">
+						我的预售
+					</a></li>
+					<li><a href="">
+						评价订单
+					</a></li>
+					<li><a href="">
+						取消订单记录
+					</a></li>
+					<li><a href="">
+						我的常购商品
+					</a></li>
+				</ul>
+				<ul>
+					<li class="title"><a href="">
+						关注中心
+					</a></li>
+					<li><a href="">
+						我的订单
+					</a></li>
+					<li><a href="">
+						团购订单
+					</a></li>
+					<li><a href="">
+						本地生活订单
+					</a></li>
+					<li><a href="">
+						我的预售
+					</a></li>
+					<li><a href="">
+						评价订单
+					</a></li>
+					<li><a href="">
+						取消订单记录
+					</a></li>
+					<li><a href="">
+						我的常购商品
+					</a></li>
+				</ul>
+				<ul>
+					<li class="title"><a href="">
+						资产中心
+					</a></li>
+					<li><a href="">
+						我的订单
+					</a></li>
+					<li><a href="">
+						团购订单
+					</a></li>
+					<li><a href="">
+						本地生活订单
+					</a></li>
+					<li><a href="">
+						我的预售
+					</a></li>
+					<li><a href="">
+						评价订单
+					</a></li>
+					<li><a href="">
+						取消订单记录
+					</a></li>
+					<li><a href="">
+						我的常购商品
+					</a></li>
+				</ul>
+			</div>
+			<div class="right">
+				<div class="right_body_top"><span>我的订单</span></div>
+				<div class="right_body_main">
+					<div class="right_body_main01">
+						<div class="dingdanxinxi">
+							<a href="">全部订单</a>
+							<a href="">待付款<i></i></a>
+							<a href="">待收货<i></i></a>
+							<a href="">待评价<i></i></a>
+						</div>
+						<div class="changgou"><span>我的常购商品</span></div>
+						<div class="tejia"><span>特价·清仓</span></div>
+						<div class="huishou"><span><a href="">订单回收站</a></span></div>
+						<div class="sousuo">
+						<form action="index.php">
+							<input type="hidden" name="m" value="order">
+							<input type="hidden" name="a" value="show">
+							<input type="text" required name="search" placeholder="请输入要搜索的订单">
+							<input type="submit">
+						</form>
+							
+							<div>高级</div>
+						</div>
+					</div>
+					<!-- 物品详情开始  -->
+					<div class="dan">
+						<table cellspacing="0">
+							<tr class="dan_top">
+								<td class="dan_01">
+								<span>近三个月订单</span>　　　　<span>订单详情</span></td>
+								<td class="dan_02">收货人</td>
+								<td class="dan_03">金额</td>
+								<td class="dan_04">全部状态</td>
+								<td class="dan_05">操作</td>
+							</tr>
+							<tr class="kongbai" style="height: 25px;background: red;">	
+							</tr>
+							<!--  -->
+	<?php
+	$sta = array('新订单','已发货','已收货','无效订单');
+		if(isset($arrs)){
+			foreach($arrs as $k=>$v){
+
+				$addtime = date('Y-m-d H:i:s',$v['addtime']);
+				$str = <<<EOF
+			<tr class="shoplist_top">
+				<td colspan="5">
+					<span>{$addtime}</span>
+					订单号<b >{$v['id']}</b>
+					<span style="padding-left: 100px;">{$good[$arr[$k]['goodsid']]['company']}</span>
+				</td>								
+			</tr>
+			<tr class="shoplist_body">
+				<td class="shopimg">
+					<div>
+						<div >
+							<img src="../admin/uploadimg/goods/{$good[$arr[$k]['goodsid']]['pic']}" alt="" width="82px" height="82px" style="float:left;display:block">
+						</div>
+						<a href="">{$arr[$k]['name']}</a>
+					</div>
+					<p><span>x{$arr[$k]['gnum']}</span></p>
+					<p><a href="">返修/退换货</a></p>
+				</td>
+				<td>
+					<p><a href="">{$v['linkman']}</a></p>
+				</td>
+				<td>
+					<p>总额 ¥<span>{$v['total']}</span></p>
+					<p><span>在线支付</span></p>
+				</td>
+				<td>
+					<p><span>{$sta[$v['status']]}</span></p>
+					<p>金币<span>+18</span></p>
+					<p><a href="index.php?m=order&a=info&id={$v['id']}">订单详情</a></p>
+				</td>
+				<td>
+					<p><a href="">评价晒单</a></p>
+					<p><a href="index.php?m=shop&a=desc&id={$arr[$k]['goodsid']}"><button type="button" >立即购买</button></a></p>
+				</td>
+			</tr>	
+
+EOF;
+			
+			echo $str;
+			}
+		}
+	
+
+
+
+	?>						
+							
+						</table>
+						<div class="fenye">
+							<div class="fenye_body">
+								<a class="fen_left" href=" ?m=order&a=show&page=<?php echo $page->prepage;echo $search; ?>"><b class="icon-left">上一页</a>
+<!-- 页码显示 -->
+        <?php
+       
+            for($i=1;$i<=$page->allpage;$i++){
+            	echo '<a href=" ?m=order&a=show&page='.$i.$search.' class="fen_num">'.$i.'</a>';
+
+                
+            }
+        
+        ?>											
+								<!-- <div class="fen_num"><span style="color: red;">1</span></div> -->
+								<a class="fen_right"href=" ?m=order&a=show&page=<?php echo $page->nextpage;echo $search; ?>">下一页</a>
+							</div>
+							
+						</div>
+					</div>
+					<!-- 物品详情结束  -->
+
+				</div>
+				<div class="ad">
+					<a href=""><img src="./include/image/dingdan/ad1.jpg" alt=""></a>
+				</div>
+				<div class="ad">
+					<a href=""><img src="./include/image/dingdan/ad2.jpg" alt=""></a>
+				</div>
+			</div>
+		</div>		
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JD</title>
+<meta name="author" content="baoan">
+<link rel="icon" type="image/jpg" href="./include/image/index/icon.jpg">
+<link rel="stylesheet" type="text/css" href="include/css/index.css">
+<script src="./include/js/jquery-1.8.3.min.js"></script>
+<script src="./include/js/jdlunbo.js"></script>
+</head>
+<body><?php  	//var_dump($_SESSION['god']); ?>
+	<!--头部-->
+	<header id="header">
+	<div class="head">
+		<div class="logo_big"><img src="./include/image/index/logo_big.png" alt=""></div>
+		<div class="head_top">
+
+			<div class="sign">
+				<div class="beijing"><a href="">北京</a></div>
+				<?php
+
+					//判断是否登录	
+					if(isset($_SESSION['god']) && $_SESSION['god']['islogin']==true){
+						$username = '亲爱的'.$_SESSION['god']['level'];
+						$dengji = $_SESSION['god']['name'];
+						$a = 'info';
+						$sign = 'info';
+					}else{
+						$username = '你好,请登录';
+						$a = 'login';
+						$dengji = '免费注册';
+						$sign = 'sign';
+					}
+
+				?>
+				<div class="nihao"><a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $username; ?></div>
+			</div>
+			<div class="top_list">
+				<ul>
+					<li ><a href="index.php?m=user&a=<?php echo $sign; ?>" style="color:#f10215"><?php echo $dengji; ?></a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=order&a=show">我的订单</a></li>
+					<li class="top_list_fuhao"><span>|</span></li> 
+					<li class="top_list_word"><a href="index.php?m=info&a=show">我的京东</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="#">京东会员</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="#">企业采购</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li class="top_list_word"><a href="#">客户服务</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li class="top_list_word"><a href="#">网站导航</a></li>
+					<li class="top_list_fuhao"><span>|</span></li>
+					<li ><a href="index.php?m=user&a=out">退出登录</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="search_nav">
+		<div class="top_search">
+
+			<div class="top_search02">
+				<div class="top_search_center">
+				<form action="index.php">
+					<div class="input">
+						<input type="hidden" name="m" value="shop">
+						<input type="hidden" name="a" value="show">
+						<input type='text' name="search" class='input1' value="<?php echo $sousuo; ?>" placeholder="请输入商品">
+						<input type='submit'  value="" class='input2'>			
+					</div>
+				</form>	
+					<div class="top_search_word">
+						
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+							<a href="#">买车省钱</a>
+						
+					</div>
+				
+				</div>
+				<div class="top_search_right">
+						<div class="carbody">
+							<i class="icon_car"></i>
+							<a class="shopcar" href="index.php?m=car&a=show">
+								我的购物车
+								<div class="shopnum">0</div>
+								
+							</a>
+							
+						</div>
+				</div>
+			</div>
+		</div>
+		<div class="top_nav">
+			<div class="top_nav_list">
+				<ul>
+					<li><a href="">秒杀</a></li>
+					<li><a href="">优惠券</a></li>
+					<li><a href="">闪购</a></li>
+					<li><a href="">拍卖</a></li>
+					<li class="top_nav_fuhao"><span>|</span></li>
+					<li><a href="">服装城</a></li>
+					<li><a href="">京东超市</a></li>
+					<li><a href="">生鲜</a></li>
+					<li><a href="">全球购</a></li>
+					<li class="top_nav_fuhao"><span>|</span></li>
+					<li><a href="">京东金融</a></li>
+				</ul>
+
+			</div>
+		</div>
+	</div>	
+	</header>
+	<!-- 轮播图部分 -->
+	<div id="main">
+		<div class="main_body">
+			<div class="main_body_left">
+				<ul>
+			<?php
+				//这里显示顶级分类
+				if(isset($types)){
+				$num=0;
+					foreach($types as $k=>$v){
+						if($v['pid']==0){
+						if($num>=13){
+							break;
+						}
+							echo "<li><a href='./index.php?m=shop&a=show&path={$v['name']}+{$v['id']}&id={$v['id']}'>{$v['name']}</a>
+										<div class='zilei'>";
+								
+								foreach($pids as $key=>$val){
+									//遍历出子类
+									if($val['pid'] == $v['id']){
+										echo '<ul>';
+										echo "<li>
+<a href='./index.php?m=shop&a=show&path={$v['name']}-{$v['id']},{$val['name']}-{$val['id']}&id={$val['id']}'>> {$val['name']} </a>";
+												echo "<ul>";
+												foreach($pids as $zi){
+													if($zi['pid']==$val['id']){
+														echo "<li>
+<a href='./index.php?m=shop&a=show&path={$v['name']}-{$v['id']},{$val['name']}-{$val['id']},{$zi['name']}-{$zi['id']}&id={$zi['id']}'>{$zi['name']}</a></li>";
+													}
+												}
+												echo "</ul>";	
+										echo "</li>";
+										echo '</ul>';
+									}
+								}
+
+							echo "	</div>
+								  </li>";
+						$num++;
+						}
+					}
+				}
+				
+
+			?>
+				
+					
+				</ul>
+			</div> 
+			<!-- 轮播图 -->
+			<div class="main_body_center">
+
+				<div class="banner">
+					<div class="roll"> <!-- 最外层包裹元素，用来控制整个大图的位置以及作为子元素定位的参考 -->
+						<div id="out">
+							<div class="con"> <!-- 包裹图片，宽要比所有图片的总宽大(必须的)， -->
+								<!-- <img src="./include/images/04.jpg"> -->
+								<img src="./include/image/index/banner01.jpg">
+								<img src="./include/image/index/banner02.jpg">
+								<img src="./include/image/index/666.jpg">
+								<img src="./include/image/index/777.jpg">
+								<!-- <img src="./include/images/01.jpg"> -->
+							</div>
+							<ul class="nav"> <!-- 放page小圆点 定位控制 z-index比图片大-->
+								<li class="select"></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+							<p class="left"><</p> <!-- 左右键 定位控制 z-index比图片大-->
+							<p class="right">></p>
+						</div>
+					</div>
+					<!-- <img src="./include/image/index/banner01.jpg" alt=""> -->
+				</div>
+
+				<div class="img">
+					<div class="img1">
+						<a href=""><img src="./include/image/index/banner_left.jpg"></a>
+					</div>
+					<div class="img2">
+						<a href=""><img src="./include/image/index/banner_right.jpg"></a>
+					</div>
+				</div>
+				
+			</div> 
+			<div class="main_body_right">
+				<div class="person">
+					<div class="touxiang">
+
+						
+				<?php
+
+					//判断是否登录	
+					if(isset($_SESSION['god']) && $_SESSION['god']['islogin']==true){
+						$username = $_SESSION['god']['name'];
+						$dengji = $_SESSION['god']['level'];
+						$pic = '../admin/uploadimg/user/'.$_SESSION['god']['pic'];
+						$a = 'info';
+						$b = 'info';
+					}else{
+						$username = '注册';
+						$dengji = '登录';
+						$pic = './include/image/index/touxiang.jpg';
+						$a = 'login';
+						$b = 'sign';
+					}
+
+				?>
+						<img src="<?php echo $pic; ?>">
+						<div class="person_word">
+							Hi，欢迎来到京东！<a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $dengji; ?></a> <a href="index.php?m=user&a=<?php echo $a; ?>"><?php echo $username; ?></a>
+						</div>
+					</div>
+					<div class="button">
+						<a href=""><div class="xinren">新人福利</div></a>
+						<a href=""><div class="vip">PLUS会员</div></a>
+					</div>
+				</div>
+				<div class="gonggao">
+					<div class="gonggao_nav">
+						<div class="cuxiao">
+							促销
+							<ul>
+								<li><a href="">来重庆綦江馆·品地道川渝味</a></li>
+								<li><a href="">京东生鲜丰富华北“菜篮子”</a></li>
+								<li><a href="">南半球三国车厘子原产地直达</a></li>
+								<li><a href="">京东售后退换无忧服务上线</a></li>
+							</ul>
+						</div>
+						　
+						<div class="cuxiao">
+							公告
+							<ul>
+								<li><a href="">来重庆綦江馆·品地道川渝味</a></li>
+								<li><a href="">京东生鲜丰富华北“菜篮子”</a></li>
+								<li><a href="">南半球三国车厘子原产地直达</a></li>
+								<li><a href="">京东售后退换无忧服务上线</a></li>
+							</ul>
+						</div>
+						<div class="more1">
+							<a href="">更多</a>
+						</div>
+					</div>
+				</div>
+				<div class="function">
+					<ul>
+						<li><a href="">
+							<div></div>
+							<p>话费</p>
+							</a>
+						</li>
+						<li><a href="">
+							<div></div>
+							<p>机票</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>酒店</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>游戏</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>企业购</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>加油卡</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>电影票</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>火车票</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>众筹</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>理财</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>礼品卡</p>
+						</a></li>
+						<li><a href="">
+							<div></div>
+							<p>白条</p>
+						</a></li>
+					</ul>
+
+				</div>
+			</div> 
+		</div>>
+	</div>
+	<!-- 商品部分 -->
+		
+	<div id="shopping">
+		<!-- 秒杀 -->
+		<div class="miaosha">
+			<div class="miaosha_top">
+				<div class="jiao">
+					
+				</div>
+				<img src="./include/image/index/miaosha_top1.png" alt="">
+				<div class="miaosha_word">
+					<a href="">总有你想不到的低价</a>
+				</div>
+				<div class="miaosha_time">
+					<img src="./include/image/index/miaosha_top3.png" alt="时间">
+				</div>
+			</div>
+			<div class="miaosha_list">
+				<ul style="margin-top:10px">
+			<?php
+				if(isset($miaosha)){
+					$num = 1;
+					foreach($miaosha as $v){
+						if($num>6){
+							break;
+						}
+					$str = <<<EOF
+					<li>
+						<a class="shop_img" href="index.php?m=shop&a=desc&id={$v['id']}">
+							<img src="../admin/uploadimg/goods/{$v['pic']}" alt="" width="125px" height="125px">
+						</a>
+						<a class="shop_message" href="index.php?m=shop&a=desc&id={$v['id']}">
+							{$v['name']} {$v['company']} {$v['descr']}
+						</a>
+						<div class="shop_price">
+							<span>￥{$v['price']}</span>
+							<span>￥<del>158.00</del></span>
+						</div>
+						<img src="./include/image/index/miaosha_mark.png" alt="" >
+					</li>
+EOF;
+					echo $str;
+					$num++;
+					}
+				}
+			
+
+
+			?>	
+					<!-- <li>
+						<a class="shop_img">
+							<img src="./include/image/index/miaosha_list1.png" alt="">
+						</a>
+						<a class="shop_message">
+							查干湖鱼 冬捕五号 冷冻有机胖头鱼 4.5-5斤 1条 年货送礼盒装
+						</a>
+						<div class="shop_price">
+							<span>￥158.00</span>
+							<span>￥<del>158.00</del></span>
+						</div>
+						<img src="./include/image/index/miaosha_mark.png" alt="" >
+					</li> -->
+				<!-- 	<li>
+						<a class="shop_img">
+							<img src="./include/image/index/miaosha_list1.png" alt="">
+						</a>
+						<a class="shop_message">
+							查干湖鱼 冬捕五号 冷冻有机胖头鱼 4.5-5斤 1条 年货送礼盒装
+						</a>
+						<div class="shop_price">
+							<span>￥158.00</span>
+							<span>￥<del>158.00</del></span>
+						</div>
+						<img src="./include/image/index/miaosha_mark.png" alt="" >
+					</li>
+					<li>
+						<a class="shop_img">
+							<img src="./include/image/index/miaosha_list1.png" alt="">
+						</a>
+						<a class="shop_message">
+							查干湖鱼 冬捕五号 冷冻有机胖头鱼 4.5-5斤 1条 年货送礼盒装
+						</a>
+						<div class="shop_price">
+							<span>￥158.00</span>
+							<span>￥<del>158.00</del></span>
+						</div>
+						<img src="./include/image/index/miaosha_mark.png" alt="" >
+					</li>
+					<li>
+						<a class="shop_img">
+							<img src="./include/image/index/miaosha_list1.png" alt="">
+						</a>
+						<a class="shop_message">
+							查干湖鱼 冬捕五号 冷冻有机胖头鱼 4.5-5斤 1条 年货送礼盒装
+						</a>
+						<div class="shop_price">
+							<span>￥158.00</span>
+							<span>￥<del>158.00</del></span>
+						</div>
+						<img src="./include/image/index/miaosha_mark.png" alt="" >
+					</li>
+					<li>
+						<a class="shop_img">
+							<img src="./include/image/index/miaosha_list1.png" alt="">
+						</a>
+						<a class="shop_message">
+							查干湖鱼 冬捕五号 冷冻有机胖头鱼 4.5-5斤 1条 年货送礼盒装
+						</a>
+						<div class="shop_price">
+							<span>￥158.00</span>
+							<span>￥<del>158.00</del></span>
+						</div>
+						<img src="./include/image/index/miaosha_mark.png" alt="" >
+					</li>
+					<li>
+						<a class="shop_img">
+							<img src="./include/image/index/miaosha_list1.png" alt="">
+						</a>
+						<a class="shop_message">
+							查干湖鱼 冬捕五号 冷冻有机胖头鱼 4.5-5斤 1条 年货送礼盒装
+						</a>
+						<div class="shop_price">
+							<span>￥158.00</span>
+							<span>￥<del>158.00</del></span>
+						</div>
+						<img src="./include/image/index/miaosha_mark.png" alt="" >
+					</li> -->
+				</ul>
+			</div>		
+		</div>
+		<!-- 领券中心 -->
+		<div class="lingquancenter">
+				<a href="" class="center_first">
+					<img src="./include/image/index/center_first.png" alt="">
+				</a>
+				<div class="center_list">
+					<ul>
+						<li>
+							<a href="">
+								<div class="center_list_price1">
+									<span>¥</span><b>100　</b>
+									<span>仅可购买休闲食品、粮油调味</span>
+								</div>
+								<div class="center_list_price2">
+									消费满199元可用
+								</div>
+								<div class="more_quan">
+									更多好券
+								</div>
+							</a>
+							<img src="./include/image/index/quan_center1.png" alt="">
+						</li>
+						<li>
+							<a href="">
+								<div class="center_list_price1">
+									<span>¥</span><b>100　</b>
+									<span>仅可购买休闲食品、粮油调味</span>
+								</div>
+								<div class="center_list_price2">
+									消费满199元可用
+								</div>
+								<div class="more_quan">
+									更多好券
+								</div>
+							</a>
+							<img src="./include/image/index/quan_center1.png" alt="">
+						</li>
+						<li>
+							<a href="">
+								<div class="center_list_price1">
+									<span>¥</span><b>100　</b>
+									<span>仅可购买休闲食品、粮油调味</span>
+								</div>
+								<div class="center_list_price2">
+									消费满199元可用
+								</div>
+								<div class="more_quan">
+									更多好券
+								</div>
+							</a>
+							<img src="./include/image/index/quan_center1.png" alt="">
+						</li>
+						<li>
+							<a href="">
+								<div class="center_list_price1">
+									<span>¥</span><b>100　</b>
+									<span>仅可购买休闲食品、粮油调味</span>
+								</div>
+								<div class="center_list_price2">
+									消费满199元可用
+								</div>
+								<div class="more_quan">
+									更多好券
+								</div>
+							</a>
+							<img src="./include/image/index/quan_center1.png" alt="">
+						</li>
+						<li>
+							<a href="">
+								<div class="center_list_price1">
+									<span>¥</span><b>100　</b>
+									<span>仅可购买休闲食品、粮油调味</span>
+								</div>
+								<div class="center_list_price2">
+									消费满199元可用
+								</div>
+								<div class="more_quan">
+									更多好券
+								</div>
+							</a>
+							<img src="./include/image/index/quan_center1.png" alt="">
+						</li>
+					</ul>
+				</div>
+		</div>
+		<!-- 发现好货 -->
+		<div class="findshop">
+			<div class="findshop_one">
+				
+				<div class='one_top'>
+					<div class="one_jiao"></div>
+					<div class="one_top_left">发现好货</div>
+					<div class="one_top_right">发现品质生活</div>
+				</div>
+				<div class="one_shop">
+					<ul>
+						<li>
+							<p>无线立体声耳机</p>
+							<img src="./include/image/index/find_one1.png" alt="">
+						</li>
+						<li>
+							<p>无线立体声耳机</p>
+							<img src="./include/image/index/pinpai01.webp" alt="">
+						</li>
+						<li>
+							<p>无线立体声耳机</p>
+							<img src="./include/image/index/pinpai01.webp" alt="">
+						</li>
+						<li>
+							<p>无线立体声耳机</p>
+							<img src="./include/image/index/find_one1.png" alt="">
+						</li>
+						<li>
+							<p>无线立体声耳机</p>
+							<img src="./include/image/index/find_one1.png" alt="">
+						</li>
+						<li>
+							<p>无线立体声耳机</p>
+							<img src="./include/image/index/pinpai01.webp" alt="">
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="findshop_two">
+				<div class='one_top'>
+					<div class="one_jiao"></div>
+					<div class="one_top_left">发现好货</div>
+					<div class="one_top_right">发现品质生活</div>
+				</div>
+				<div class="one_shop">
+					<ul>
+						<li class="chang">
+							<p>联想航海王</p>
+							<p>新年限时直降300</p>
+							<img src="./include/image/index/find_one1.png" alt="">
+						</li>
+						<li class="chang">
+							<p>联想航海王</p>
+							<p>新年限时直降300</p>
+							<img src="./include/image/index/find_one1.png" alt="">
+						</li>
+						<li class="kuan">
+							<img src="./include/image/index/find_two03.jpg" alt="">
+						</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+			<div class="findshop_three">
+				
+				<div class='one_top'>
+					<div class="one_jiao"></div>
+					<div class="one_top_left">品牌头条</div>
+					<div class="one_top_right">大牌资讯全掌握</div>
+				</div>
+				<div class="one_shop">
+					<ul>
+						<li class="chang">
+							
+							<img src="./include/image/index/pinpai01.webp" alt="">
+							<p><a href="">小米（MI）小米AIR 12.5英寸全金属</a></p>
+						</li>
+						<li class="chang">
+							<img src="./include/image/index/pinpai01.webp" alt="">
+							<p><a href="">小米（MI）小米AIR 12.5英寸全金属</a></p>
+						</li>
+						<li class="chang">
+							<img src="./include/image/index/pinpai01.webp" alt="">
+							<p><a href="">小米（MI）小米AIR 12.5英寸全金属</a></p>
+						</li>
+						<li class="chang">
+							<img src="./include/image/index/pinpai01.webp" alt="">
+							<p><a href="">小米（MI）小米AIR 12.5英寸全金属</a></p>
+						</li>
+						<li class="chang">
+							<img src="./include/image/index/pinpai01.webp" alt="">
+							<p><a href="">小米（MI）小米AIR 12.5英寸全金属</a></p>
+						</li>
+						<li class="chang">
+							<img src="./include/image/index/pinpai01.webp" alt="">
+							<p><a href="">小米（MI）小米AIR 12.5英寸全金属</a></p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- 三个图片 -->
+		<div class="santupian">
+			<div class="santu">
+				<div ><img src="./include/image/index/santupian1.png" alt=""> </div>
+				<div ><img src="./include/image/index/santupian2.jpg" alt=""> </div>
+				<div ><img src="./include/image/index/santupian3.jpg" alt=""> </div>
+			</div>
+		</div>
+		<!-- 享品质 -->
+		<div class="pinzhi_title">
+				<div></div>
+				<img src="./include/image/index/pinzhi.png" alt="">
+				<div></div>
+		</div>
+		<div class="xiangpinzhi">
+			
+			<div class="pinzhi_list">
+				<ul>
+					<li><a href="">
+						<img src="./include/image/index/pinzhi01.jpg" alt="">
+						<img class="pinzhi01-1" src="./include/image/index/pinzhi01.1.jpg" alt="">
+					</a></li>
+					<li><a href="">
+						<img src="./include/image/index/pinzhi01.jpg" alt="">
+						<img class="pinzhi01-1" src="./include/image/index/pinzhi01.1.jpg" alt="">
+					</a></li>
+					<li><a href="">
+						<img src="./include/image/index/pinzhi01.jpg" alt="">
+						<img class="pinzhi01-1" src="./include/image/index/pinzhi01.1.jpg" alt="">
+					</a></li>
+					<li><a href="">
+						<img src="./include/image/index/pinzhi01.jpg" alt="">
+						<img class="pinzhi01-1" src="./include/image/index/pinzhi01.1.jpg" alt="">
+					</a></li>
+					<li><a href="">
+						<img src="./include/image/index/pinzhi01.jpg" alt="">
+						<img class="pinzhi01-1" src="./include/image/index/pinzhi01.1.jpg" alt="">
+					</a></li>
+					<li><a href="">
+						<img src="./include/image/index/pinzhi01.jpg" alt="">
+						<img class="pinzhi01-1" src="./include/image/index/pinzhi01.1.jpg" alt="">
+					</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- 三个图片 -->
+		<div class="santupian">
+			<div class="santu">
+				<div ><img src="./include/image/index/santupian1.png" alt=""> </div>
+				<div ><img src="./include/image/index/santupian2.jpg" alt=""> </div>
+				<div ><img src="./include/image/index/santupian3.jpg" alt=""> </div>
+			</div>
+		</div>
+		<!-- 爱生活 -->
+		<div class="pinzhi_title">
+				<div></div>
+				<img src="./include/image/index/shenghuo.jpg" alt="">
+				<div></div>
+		</div>
+		<div class="aishenghuo">
+			<div class="shenghuo_left">
+				<div class="left_head">
+					<div class='head_word'>
+						<div>爱逛</div>
+						<ul>
+							<li><a href="">牛仔</a></li>
+							<li><a href="">潮包</a></li>
+							<li><a href="">欧米茄</a></li>
+							<li><a href="">珠宝首饰</a></li>
+							<li><a href="">奢品</a></li>
+							<li><a href="">环球时尚</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="left_body">
+					<div class="liebiao">
+						<div class="img_one"><a href="">
+							<img src="./include/image/index/shenghuo_left01.jpg" alt="">
+						</a></div>
+						<ul>
+							<li class="img_four kong1"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four "><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four kong2"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>	
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+						</ul>
+					</div>
+					<div class="img_three">
+						<div class="img_three1"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+						<div class="img_three1"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+						<div class="img_three3"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+					</div>
+					<div class="body_foot">
+						
+					</div>
+				</div>
+				
+			</div>
+			<div class="shenghuo_right">
+				<div class="left_head">
+					<div class='head_word'>
+						<div>爱美丽</div>
+						<ul>
+							<li><a href="">SK-‖</a></li>
+							<li><a href="">套装</a></li>
+							<li><a href="">面膜</a></li>
+							<li><a href="">乳液面霜</a></li>
+							<li><a href="">买二免一</a></li>
+							<li><a href="">进口洗护</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="left_body">
+					<div class="liebiao">
+						<div class="img_one"><a href="">
+							<img src="./include/image/index/shenghuo_right01.jpg" alt="">
+						</a></div>
+						<ul>
+							<li class="img_four kong1"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four "><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four kong2"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>	
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+						</ul>
+					</div>
+					<div class="img_three">
+						<div class="img_three1"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+						<div class="img_three1"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+						<div class="img_three3"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+					</div>
+					<div class="body_foot">
+						
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		<!-- /*家电馆*/ -->
+		<div class="aishenghuo">
+			<div class="shenghuo_left">
+				<div class="left_head jiadian">
+					<div class='head_word'>
+						<div>家电馆</div>
+						<ul>
+							<li><a href="">牛仔</a></li>
+							<li><a href="">潮包</a></li>
+							<li><a href="">欧米茄</a></li>
+							<li><a href="">珠宝首饰</a></li>
+							<li><a href="">奢品</a></li>
+							<li><a href="">环球时尚</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="left_body">
+					<div class="liebiao">
+						<div class="img_one"><a href="">
+							<img src="./include/image/index/shenghuo_left01.jpg" alt="">
+						</a></div>
+						<ul>
+							<li class="img_four kong1"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four "><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four kong2"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>	
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+						</ul>
+					</div>
+					<div class="img_three">
+						<div class="img_three1"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+						<div class="img_three1"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+						<div class="img_three3"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+					</div>
+					<div class="body_foot">
+						
+					</div>
+				</div>
+				
+			</div>
+			<div class="shenghuo_right">
+				<div class="left_head gaoji">
+					<div class='head_word'>
+						<div>搞机派</div>
+						<ul>
+							<li><a href="">SK-‖</a></li>
+							<li><a href="">套装</a></li>
+							<li><a href="">面膜</a></li>
+							<li><a href="">乳液面霜</a></li>
+							<li><a href="">买二免一</a></li>
+							<li><a href="">进口洗护</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="left_body">
+					<div class="liebiao">
+						<div class="img_one"><a href="">
+							<img src="./include/image/index/shenghuo_right01.jpg" alt="">
+						</a></div>
+						<ul>
+							<li class="img_four kong1"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four "><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+							<li class="img_four kong2"><a href="">
+								<b>衣锦还乡</b>
+								<span>跨店两件7折</span>	
+								<img src="./include/image/index/shenghuo_left02.jpg" alt="">
+							</a></li>
+						</ul>
+					</div>
+					<div class="img_three">
+						<div class="img_three1"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+						<div class="img_three1"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+						<div class="img_three3"><a href="">
+							<img src="./include/image/index/shenghuo_left06.jpg" alt="">
+						</a></div>
+					</div>
+					<div class="body_foot">
+						
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		<!-- 三个图片 -->
+		<div class="santupian">
+			<div class="santu">
+				<div ><img src="./include/image/index/santupian1.png" alt=""> </div>
+				<div ><img src="./include/image/index/santupian2.jpg" alt=""> </div>
+				<div ><img src="./include/image/index/santupian3.jpg" alt=""> </div>
+			</div>
+		</div>
+		<!-- 还没够 -->
+		<div class="pinzhi_title">
+				<div></div>
+				<img src="./include/image/index/meogou.jpg" alt="">
+				<div></div>
+		</div>
+		<p></p>
+		<div class="haimeigou">
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou01.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou01.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou01.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou01.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+			<a href="" class="meigoulist">
+				<img src="./include/image/index/meigou01.webp" alt="">
+				<p>Apple MacBook Air 13.3英寸笔记本电脑 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</p>
+				<p class="price">¥6988.0</p>
+			</a>
+		</div>
+	</div>
+<!-- 小火箭 -->
+	<div id="return">
+		<a href="">
+			<img src="./include/image/footer/return.png" title="返回顶部">
+		</a>
+	</div>		
+	
+	
+</body>
+</html>

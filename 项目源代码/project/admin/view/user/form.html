@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+    
+    select{
+        width:200px;
+        height:40px;
+        border:1px solid #ccc;
+        margin-top:10px;
+    }
+</style>
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">表单</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span><?php echo $title; ?></span></div>
+    <form action="./index.php?m=user&a=<?php echo $method; ?>" method="post">
+        <ul class="forminfo">
+        <?php echo $hidden; ?>
+            <li><label>用户名</label>
+           <?php 
+            if(!empty($res)){
+                $name = $res[0]['username'];
+                $tip = '不修改密码不需要填写此项';
+                $re = '';
+                $read = 'readonly';
+            }else{
+                $name = '';
+                $tip = '请输入5-13个非汉字字符';
+                $re = 'required';
+                $read = '';
+            }
+            ?>
+                <input name="username" type="text" pattern="^[\w@.]{5,13}$" class="dfinput" value="<?php echo $name ; ?>"  placeholder="请输入5-13个非汉字字符" required maxlength="13"<?php echo $read; ?>/>
+            
+            
+            <i>请输入5-13个非汉字字符</i></li>
+            <li><label>密码</label><input name="pwd" type="password" class="dfinput" value="" pattern="^[\w.]{3,13}$" placeholder="<?php echo $tip; ?>" <?php echo $re; ?>/><i></i></li>
+            <!-- <li><label>是否审核</label><cite><input name="" type="radio" value="" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio" value="" />否</cite></li> -->
+            <li><label>再次输入密码</label><input name="repwd" type="password" class="dfinput" value="" placeholder="请再次输入以上字符" <?php echo $re; ?>/><i></i></li>
+            <?php   
+                $xz = $pt = $vip = $jin = $chao = '';
+                if(isset($res[0]['level'])){
+                    if($_SESSION['user']['id']==$res[0]['id']){
+                         $xz = $pt = $vip = $jin = $chao = 'disabled ';
+                    }
+                    switch($res[0]['level']){
+                        case 0:
+                            $pt += 'selected';
+                            break;
+                        case 1:
+                            $vip += 'selected';
+                            break;
+                        case 2:
+                            $jin += 'selected';
+                            break;
+                        case 3:
+                            $chao += 'selected';
+                            break; 
+                         default:
+                            $xz += 'selected';             
+                    }
+                }
+                
+            ?>
+            <li><label>选择权限</label>
+                <select name="level" id="level" style="position:relative;top:-10px;">
+                    <option value="xz" <?php echo $xz; ?> >&nbsp;&nbsp;--请务必选择--</option>
+                    <option value="0" <?php echo $pt; ?> >&nbsp;&nbsp;普通</option>
+                    <option value="1" <?php echo $vip; ?> >&nbsp;&nbsp;VIP</option>
+                    <option value="2" <?php echo $jin; ?> >&nbsp;&nbsp;禁用</option>
+                    <option value="3" <?php echo $chao; ?> >&nbsp;&nbsp;超级管理员</option>
+                </select>  
+                
+            </li>
+               
+           <!--  <li><label>文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea></li> -->
+            <li><label>&nbsp;</label><input  type="submit" class="btn" value="确认保存"/></li>
+        </ul>
+    </form>
+    
+    
+    
+    </div>
+
+
+</body>
+
+</html>

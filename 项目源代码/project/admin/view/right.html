@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./include/js/jquery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".click").click(function(){
+  $(".tip").fadeIn(200);
+  });
+  
+  $(".tiptop a").click(function(){
+  $(".tip").fadeOut(200);
+});
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+</script>
+<style>
+    
+    #tab2 .vocation{
+        float:right;
+        position:relative;
+        top:7px;
+    }
+    #tab2 .chaxun input{
+        width:30px;
+        border:1px solid #ccc;
+    }
+    table th,td{
+        text-align:center;
+    }
+</style>
+
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">数据表</a></li>
+    <li><a href="#">基本内容</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+        <div class="tools">
+        
+        	 
+    <div id="tab2" class="tabson">
+    <!-- 查询模块 -->
+    <form action="./index.php?m=user&a=show" method="post">
+        <ul class="seachform">
+    
+            <li><label>综合查询</label><input name="" type="text" class="scinput" /></li>
+            <li><label>权限:</label>  
+            <div class="vocation" >
+            <select class="select3">
+            <option>全部</option>
+            <option>其他</option>
+            </select>
+            </div>
+            </li>
+            
+            <li><label>编号区间:</label>  
+            <div class="vocation chaxun">
+                <input type="num" name="num1">~
+                <input type="num" name="num2">
+               
+            </div>
+            </li>
+            
+            <li><label>时间查询:</label>  
+            <div class="vocation">
+            <select class="select3">
+            <option>三天前</option>
+            <option>三个月前</option>
+            </select>
+            </div>
+            </li>
+            
+            <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+            
+        </ul>
+    </form>
+    
+    
+        </div>
+    
+    <!-- 会员列表模块 -->
+        <table class="tablelist">
+        	<thead>
+        	<tr>
+            <th><input name="" type="checkbox" value="" checked="checked"/></th>
+            <th>编号<i class="sort"><img src="./include/images/px.gif" /></i></th>
+            <th>用户</th>
+            <th>权限</th>
+            <th>添加时间</th> 
+            <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+       
+<?php 
+
+foreach($row as $k=>$v){
+    echo "<tr>";
+    echo "<td><input name='' type='checkbox' value='' /></td>";        
+    echo "<td>{$v['id']}</td>";       
+    echo "<td>{$v['username']}</td>";        
+    echo "<td>{$level[$v['level']]}</td>"; 
+    $t = date('Y-m-d H:i:s',$v['addtime']);       
+    echo "<td>{$t}</td>";               
+    echo "<td><a href='./index.php?m=user&a=add&id={$v['id']}' class='tablelink'>修改</a>     <a href='./index.php?m=user&a=del&id={$v['id']}' class='tablelink'> 删除</a>
+         <a href='./index.php?m=user&a=info&id={$v['id']}' class='tablelink'> 查看2详细</a></td>";
+
+    echo "</tr>"; 
+
+}
+
+
+?>
+        
+        </tbody>
+    </table>
+    
+   
+    <div class="pagin">
+    
+    	<div class="message">共<i class="blue"><?php echo $page->allpage;?></i>页，当前显示第&nbsp;<i class="blue"><?php echo $page->page; ?>&nbsp;</i>页</div>
+        <ul class="paginList">  
+        <li class="paginItem"><a href=" ?m=user&a=show&page=<?php echo $page->prepage; ?>"><span class="pagepre"></span></a></li>
+        <?php
+            for($i=1;$i<=$page->allpage;$i++){
+                echo '<li class="paginItem"><a href=" ?m=user&a=show&page='.$i.'">'.$i.'</a></li>';
+            }
+        
+        ?>
+        
+        <li class="paginItem"><a href=" ?m=user&a=show&page=<?php echo $page->nextpage; ?>"><span class="pagenxt"></span></a></li>
+        </ul>
+    </div>
+    
+    
+        <div class="tip">
+        	<div class="tiptop"><span>提示信息</span><a></a></div>
+            
+          <div class="tipinfo">
+            <span><img src="../include/images/ticon.png" /></span>
+            <div class="tipright">
+            <p>是否确认对信息的修改 ？</p>
+            <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
+            </div>
+            
+            <div class="tipbtn">
+            <input name="" type="button"  class="sure" value="确定" />&nbsp;
+            <input name="" type="button"  class="cancel" value="取消" />
+            </div>
+        
+        </div>
+        
+    
+    
+    
+    </div>
+    
+    <script type="text/javascript">
+	$('.tablelist tbody tr:odd').addClass('odd');
+	</script>
+
+</body>
+
+</html>

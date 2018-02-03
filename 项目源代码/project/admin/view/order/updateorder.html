@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+    
+    select{
+        width:200px;
+        height:40px;
+        border:1px solid #ccc;
+        margin-top:10px;
+    }
+</style>
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">表单</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span>订单号 : <?php echo $_GET['id'] ?></span></div>
+    <!-- 判断表单 -->
+    <form action="index.php?m=order&a=do_update" method="post" enctype="multipart/form-data">
+        <ul class="forminfo">
+       
+               <?php
+                if(isset($_GET['id'])){
+
+                    echo '<input type="hidden" name="id" value="'.$_GET['id'].'"/>';
+                }
+                ?>
+            
+            <li><label>会员ID</label><input name="name" type="text" class="dfinput" value="<?php echo isset($res[0]['uid'])?$res[0]['uid']:''; ?>" required disabled/><b>*</b><i>请输入最多13个字</i></li>
+               
+
+
+           
+            <li><label>订单总计</label><input name="price"  type="text" class="dfinput" value="<?php echo isset($res[0]['total'])?$res[0]['total']:''; ?>"  disabled /><b>*</b><i>请输入合法的价格</i></li>
+
+            <li><label>联系人</label>
+            <input name="pic" type="text" class="dfinput" disabled style="line-height:30px;" value="<?php echo $res[0]['linkman']; ?>"  />
+            </li>
+            <li><label>联系电话</label><input name="company" type="text" class="dfinput" value="<?php echo isset($res[0]['phone'])?$res[0]['phone']:''; ?>"  required disabled/></li>
+           <?php
+                $new = $now = $gtime = '';
+                if(isset($res[0])){
+                        if($res[0]['status']==0){
+                                $new = 'checked';
+                        }elseif($res[0]['status']==1){
+                                $now = 'checked';
+                        }elseif($res[0]['status']==2){
+                                $gtime = 'checked';
+                        }else{
+                            $wu = 'checked';
+                        }
+                }
+
+           ?>
+            <li><label>商品状态</label><cite>
+            <input name="status" type="radio" value="0" <?php echo $new; ?> />新订单&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name="status" type="radio" value="1"  <?php echo $now; ?>/>已发货　
+            <input name="status" type="radio" value="2" <?php echo $gtime;?>/>已收货 　
+            <input name="status" type="radio" value="3" <?php echo $wu;?>/>无效订单
+             </cite></li>
+
+            <li><label>邮政编码</label><input name="store" type="number" class="dfinput" value="<?php echo isset($res[0]['code'])?$res[0]['code']:''; ?>" disabled /><b>*</b></li>
+
+            <li><label>收货地址</label><input name="num" type="text" class="dfinput" value="<?php echo isset($res[0]['address'])?$res[0]['address']:''; ?>" disabled placeholder="不可选,默认为0"/></li>
+
+            <li><label>成交时间</label><input name="addtime" type="text" class="dfinput" value="<?php echo isset($res[0]['addtime'])?date('Y-m-d H:i:s',$res[0]['addtime']):''; ?>" disabled /></li>
+
+            
+         
+            <li><label>&nbsp;</label><input type="submit" class="btn" value="确认修改"/></li>
+        </ul>
+    </form>
+                
+    </div>
+
+
+</body>
+
+</html>

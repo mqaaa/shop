@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./include/js/jquery.js"></script>
+<script language="javascript">
+$(function(){	
+	//导航切换
+	$(".imglist li").click(function(){
+		$(".imglist li.selected").removeClass("selected")
+		$(this).addClass("selected");
+	})	
+})	
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".click").click(function(){
+  $(".tip").fadeIn(200);
+  });
+  
+  $(".tiptop a").click(function(){
+  $(".tip").fadeOut(200);
+});
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+</script>
+<style>
+    
+    #tab2 .vocation{
+        float:right;
+        position:relative;
+        top:7px;
+    }
+    #tab2 .chaxun input{
+        width:60px;
+        border:1px solid #ccc;
+    }
+    #tab2 .select3{
+        width:60px;
+        text-align:center;
+        border:1px solid #ccc;
+    }
+</style>
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">栏目管理</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+       <!-- 查询模块 -->
+    <form action="./index.php" method="get" id="tab2">
+        <ul class="seachform">
+        <input type="hidden" name="m" value="type">
+        <input type="hidden" name="a" value="show">
+
+
+            <li><label>精准查询</label>
+                <input name="search" type="text" class="scinput" value="" placeholder="请输入栏目名或者关键字"/>
+            </li>
+    
+            <li><label>栏目等级:</label>  
+            <div class="vocation" >
+            <select class="select3" name="lev">
+            <option value=""  >&nbsp;&nbsp;全部</option>
+             <?php 
+
+                   if(isset($lanmu) && count($lanmu)>0){
+                        foreach($lanmu as $k=>$v){
+                            //父亲的路径加父亲的ID
+                            //判断逗号出现的次数
+                           
+                            echo '<option value="'.$v['id'].'"  >&nbsp;&nbsp;'.$v['name'].'</option>';
+                        }
+                   }
+                    
+                    
+                ?>    
+         
+           
+            </select>
+            </div>
+            </li>
+            
+            <li><label>编号区间:</label>  
+            <div class="vocation chaxun" >
+                <input type="num" name="num1" value="">~
+                <input type="num" name="num2" value="">
+               
+            </div>
+            </li>
+            
+             <li ><a href="index.php?m=type&a=show" ><label style="background:#ccc; display:block; width:60px;text-align:center;padding-left:8px;">重新查询</label></a></li>
+            <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+            <li><label>&nbsp;</label><input name="" type="reset" class="scbtn" value="重置"/></li>
+
+        </ul>
+    </form>
+    
+    <table class="imgtable">
+    
+    <thead>
+    <tr>
+    <th width="100px;" align="left">分类树</th>
+    <th align="left">ID</th>
+    <th align="center">栏目名</th>
+    <th align="left">父ID</th>
+    <th align="left">栏目路径</th>
+    <th align="left">栏目管理</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    <!-- <img src="./include/images/dirsecond.gif" /> $arr1[] = $v['id'];
+        $arr1[] = ','; 
+        $arr2[] = $v['name'];
+        $arr2[] = '';
+    str_replace($arr1,$arr2,$v['path']);
+    
+     -->
+ <?php  
+   
+   if(!empty($lanmu)){
+ 
+    foreach($lanmu as $k=>$v){
+             
+        if($v['pid']==0){
+            $img = '<img src="./include/images/dirfirst.gif" />';
+        }else{
+            $img = '<img src="./include/images/dirsecond.gif" />';
+        }
+        $v['path'] = rtrim($v['path'],',');
+       
+        $path = strtr($v['path'],$arr1); 
+        $pid = strtr($v['pid'],$arr1);
+        $pide = $v['pid'].'-'.$pid;
+    $str = <<<EOF
+        <tr>
+        <td class="imgtd" height="70px">{$img}</td>
+        <td><p>{$v['id']}</p></td>
+        <td width="200" align="center"><p><a href="index.php?m=goods&a=show&lev={$v['id']}">{$v['name']}　<br><i>(查看所属商品)</i></a></p></td>
+        <td>{$pide}</td>
+        <td width="330">{$path}</td>
+        <td><a href='./index.php?m=type&a=update&id={$v['id']}&pname={$pid}' class='tablelink'>修改</a>　<a href='./index.php?m=type&a=son_add&id={$v['id']}' class='tablelink'>[添加子类]</a>　<a href='./index.php?m=type&a=del&id={$v['id']}' class='tablelink'> 　<b style="color:red;">删除</b></a></td>
+        </tr>
+EOF;
+
+    echo $str;
+    }
+   
+  }   
+ ?>   
+    
+    
+    </tbody>
+    
+    </table>
+    
+    
+    
+    
+    
+   
+    <div class="pagin">
+
+    <!-- 分页 -->
+        <div class="message">共<i class="blue"><?php echo $page->allpage;?></i>页，当前显示第&nbsp;<i class="blue"><?php echo $page->page; ?>&nbsp;</i>页</div>
+
+        <ul class="paginList"> 
+        <!-- 首页 -->
+        <?php
+            
+                echo '<li class="paginItem">
+                <a href=" ?m=type&a=show&page=1'.$search.$searchlev.$qujian.'">'.'首'.'</a></li>';
+        
+        ?>
+         <!-- 上一页 -->
+        <li class="paginItem"><a href=" ?m=type&a=show&page=<?php echo $page->prepage; echo $search; echo $searchlev; echo $qujian; ?>"><span class="pagepre"></span></a></li>
+        <!-- 页码显示 -->
+        <?php
+       
+            for($i=1;$i<=$page->allpage;$i++){
+                echo '<li class="paginItem">
+                <a href=" ?m=type&a=show&page='.$i.''.$search.$searchlev.$qujian.'">'.$i.'</a></li>';
+            }
+        
+        ?>
+        <!-- 下一页 -->
+        <li class="paginItem"><a href=" ?m=type&a=show&page=<?php echo $page->nextpage; ?><?php echo $search; echo $searchlev; echo $qujian;?>"><span class="pagenxt"></span></a></li>
+
+        <!-- 尾页 -->
+        <?php
+            
+                echo '<li class="paginItem">
+                <a href=" ?m=type&a=show&page='.$page->allpage.''.$search.$searchlev.$qujian.'">'.'尾'.'</a></li>';
+        
+        ?>
+
+        </ul>
+
+    </div>
+    
+   <!--  <div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="./include/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
+     -->
+    
+    
+    
+   <!--  </div>
+    
+    <div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="./include/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div> -->
+    
+<script type="text/javascript">
+	$('.imgtable tbody tr:odd').addClass('odd');
+	</script>
+    
+</body>
+
+</html>

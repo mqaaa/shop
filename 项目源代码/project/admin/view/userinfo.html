@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>个人中心</title>
+	<meta name="author" content="baoan">
+	<link rel="icon" type="image/jpg" href="image/index/icon.jpg">
+	
+	<link rel="stylesheet" href="../include/css/userinfo.css">
+	
+</head>
+<body>
+	
+	<div id="zhuti">
+		<div class="zhuti_body">
+			
+			<div class="right">
+					<div class="info_head">
+						<a href="">基本信息</a>&nbsp;
+						
+					</div>
+					<div class="user_set">
+					<form action="">
+						<div class="info_set">
+							<div class="infolist">
+								用户名：<b>1345372796_m</b>
+							</div>
+							<div class="infolist">
+								真&nbsp;名：<input type="text" name="nicheng">
+							</div>
+							<div class="infolist">
+								年&nbsp;龄：<input type="text" pattern="^\d{1,3}$" name="age">
+							</div>
+							<div class="infolist">
+								性&nbsp;别：&nbsp;<input type="radio" name="sex">男&nbsp;
+									  <input type="radio" name="sex">女&nbsp;
+									  <input type="radio" name="sex" checked>保密
+							</div>
+							<div class="infolist">
+								电&nbsp;话：<input type="text" parrent="^\d+$" name="phone">
+							</div>
+							<!-- 需要单独拼接 转化为时间戳存储 -->
+							<div class="infolist">
+								生&nbsp;日：<select name="year">
+										<option value="xz">请选择</option>
+										foreach($i=1970;$i<2038;$i++){
+											echo '<option value="'.$i.'">'.$i.'</option>';
+										}
+									  </select> 年
+									  <select name="year">
+										<option value="xz">请选择</option>
+									  </select> 月
+									  <select name="year">
+										<option value="xz">请选择</option>
+									  </select> 日
+							</div>
+							<div class="infolist">
+								婚&nbsp;否：<select name="year">
+										<option value="dan">单身</option>
+										<option value="yihun">已婚</option>
+										<option value="li">离异</option>
+										
+									  </select> 
+							</div>
+							<div class="infolist">
+								邮&nbsp;箱：<input type="email" name="email">
+							</div>
+							
+							
+							<div class="hobby1">
+								兴趣爱好：请选择您感兴趣的分类，给您最精准的推荐
+							</div>
+							<div class="hobby">
+								
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="shu"><label for="shu">图书/音像/数字商品</label>
+								</div>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="sport"><label for="sport">运动健康</label>
+								</div>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="shouji"><label for="shouji">手机/数码</label>
+								</div>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="diannao"><label for="diannao">电脑/办公</label>
+								</div>
+								<div class="hobbys">
+									<input type="checkbox" name="hobby[]" id="zhubao"><label for="zhubao">服饰内衣/珠宝首饰</label>
+								</div>
+								
+								
+							</div>
+							<div class="infolist">
+								地&nbsp;址：<input type="text" name="realname">
+							</div>
+							<div class="infolist"><input type="submit" value="<?php echo $submit; ?>"></div>
+
+						</div>
+					
+						<div class="touxiang">
+							<div class="touimg">
+								<img src="image/vip/touxiang.jpg" alt="" width="104px" height="104px">
+							</div>
+							<div class="msg">
+								<p>
+									用户名:<b>1345372796_m</b>	
+								</p>
+								<p>
+									等级:<span>铜牌会员</span>	
+								</p>
+								<p>
+									小白信用:<span>极好</span>	
+								</p>
+								<p>
+									会员类型：个人用户
+								</p>
+							</div>
+						</div>
+						<div class="infolist" style="float:left;margin-top:20px;">修改头像：<input type="file" name="pic" ></div>
+						</form>	
+					</div>
+			</div>
+		</div>		
+	</div>
+	
+</body>
+</html>

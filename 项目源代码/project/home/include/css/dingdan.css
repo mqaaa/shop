@@ -1,0 +1,544 @@
+*{
+	padding:0;
+	margin:0;
+}
+body{
+	background: #F5F5F5;
+}
+ a{
+	text-decoration:none;
+	color:#666;
+	font-size: 12px;
+}
+a:hover{
+	color: #f10215;
+}
+ li{
+	list-style:none;
+}
+/*头部*/
+#header{
+	width:100%;
+	
+	overflow: hidden;
+	
+}
+#header .head{
+	width:100%;
+	background:#E3E4E5;
+	
+	position: relative;
+}
+/*#header .head .logo_big{
+	position: absolute;
+	width: 190px;
+	height: 170px;
+	top: 0;
+	left: 37px;
+	z-index: 999;
+	background: #fff;
+	box-shadow: 0 2px 10px #ccc; 
+}*/
+#header .head_top{
+	width:1190px;
+	height:30px;
+	margin:0 auto;
+
+}
+#header .head_top .sign{
+	float:left;
+	height:30px;
+	line-height:30px;
+	width:520px;
+	overflow: hidden;
+	
+}
+#header .head_top .sign .beijing{
+	float:left;
+	/*background:url(../image/index/icon_zuobiao.png) no-repeat 0 3px;*/
+	/*padding-left:20px;*/
+	height:30px;
+	line-height: 30px;
+}
+#header .head_top .sign .nihao{
+	float:right;
+}
+
+#header .head_top .top_list{
+	float:right;
+	width:670px;
+	height:30px;
+}
+#header .head_top .top_list ul{
+	float:right;
+}
+#header .head_top .top_list ul li{
+	float: left;
+	height:30px;
+	line-height: 30px;
+	margin-right:10px;
+}
+#header .head_top .top_list ul li a{
+	font-size: 13px;
+	color: #63595A;
+}
+#header .head_top .top_list ul li a:hover{
+	color: #f10215;
+}
+#header .head_top .top_list ul li span{
+	font-size: 10px;
+	color:#999;
+	opacity: 0.6;
+}
+#header .head_top .top_list ul li.top_list_word{
+	padding-right: 17px;
+	background: url(../image/index/icon_xiabiao.png) no-repeat 52px 4px;
+}
+#header .search_nav{
+	width:100%;
+	background: #E45050;
+	overflow: hidden;
+}
+#header .top_search{
+	width:1190px;
+	height:80px;
+	margin:0 auto;
+	background: #E45050;
+	overflow: hidden;
+	
+}
+#header .top_search .logo_shop{
+	display: block;
+	float: left;
+	width: 300px;
+	height: 80px;
+	
+	overflow:hidden;
+}
+#header .top_search .logo_shop .tupian{
+	padding-bottom: 6px;
+}
+/*新加的vip导航*/
+#header .top_search ul.nav{
+	width: 380px;
+	height: 80px;
+	margin-top: 35px;
+	float: left;
+}
+#header .top_search ul.nav li{
+	float: left;
+	
+	width: 90px;
+	
+	text-align: center;
+	color: #fff;
+	font-size: 15px;
+}
+#header .top_search ul.nav li a{
+	color: #fff;
+	font-size: 16px;
+}
+#header .top_search ul.nav li i{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: url(../image/vip/icon.png) no-repeat;
+}
+#header .top_search ul.nav li.shezhi i{
+	background-position: 0 -119px;
+}
+#header .top_search ul.nav li.shequ i{
+	background-position: 0 -119px;
+}
+#header .top_search ul.nav li.xiaoxi i{
+	display: inline-block;
+	width: 26px;
+	height: 26px;
+	background: url(../image/vip/qipao.png) no-repeat;
+	background-position: 0 0px;
+	position: relative;
+	top: -15px;
+	color: #000;
+	font-weight: bold;
+	font-style: normal;
+}
+/**/
+#header .top_search .top_search02{
+	float:right;
+	overflow:hidden;
+}
+#header .top_search .top_search_center{
+	
+	height:80px;
+	float:left;
+	
+}
+#header .top_search .top_search_center .input{
+	width:200px;
+	height:35px;
+	
+	float:right;
+	margin-top:25px;
+	padding-right:14px;
+}
+#header .top_search .top_search_center .input .input1{
+	width:128px;
+	height:37px;
+	display:block;
+	outline:0;
+	border:0;
+	float:left;
+	padding-left: 5px;
+}
+#header .top_search .top_search_center .input .input2{
+	width:56px;
+	height:37px;
+	display:block;
+	float:left;
+	background:#F7F7F7 ;
+	background-position: 7px 2px;
+	border:0;
+	color: #666;
+	font-size: 13px;
+	cursor:pointer;
+}
+#header .top_search .top_search_center .top_search_word{
+	width:550px;
+	margin-top:10px;
+	clear:both;
+	padding-top:5px;
+}
+#header .top_search .top_search_center .top_search_word a{
+	padding-right:1px;
+	
+}
+/*搜索框*/
+#header .top_search .top_search_right{
+	width:160px;
+	height:80px;	
+	float:left;
+	
+}
+#header .top_search .top_search_right  .carbody{
+	width:145px;
+	overflow:hidden;
+	border: 1px solid #ccc;
+	line-height:35px;
+	margin-top:25px;
+	background:#f9f9f9;
+}
+#header .top_search .top_search_right  i.icon_car{
+	display: block;
+	width:22px;
+	height:20px;
+	margin-top:8px;
+	background:url(../image/index/icon_car.png) no-repeat 2px -90px;
+	float:left;
+	margin-left:7px;
+}
+#header .top_search .top_search_right .shopcar{
+	display: block;
+	
+	float:left;
+	
+	
+	width:107px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+
+	font-size:13px;
+	color: #f10215;
+}
+#header .top_search .top_search_right .carbody:hover {
+	background:#fff;
+}
+#header .top_search .top_search_right .carbody:hover i.icon_car{
+	background:url(../image/index/icon_car.png) no-repeat 2px -115px;
+}
+#header .top_search .top_search_right .shopcar .shopnum{
+	line-height:16px;
+	position: relative;
+	top: -5px;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	color: #fff;
+	background: #f10215;
+	border-radius: 50%;
+}
+/*本页主体*/
+#zhuti{
+	width:100%;
+	height: auto;
+	overflow: hidden;
+}
+#zhuti .zhuti_body{
+	width: 1190px;
+	height: auto;
+	margin: 20px auto;
+}
+/*主体左边*/
+#zhuti .zhuti_body .left{
+	width: 120px;
+	height: 800px;
+	
+	float: left;
+}
+#zhuti .zhuti_body .left ul{
+	margin-left: 10px;
+	margin-bottom: 25px;
+}
+#zhuti .zhuti_body .left ul li{
+	width: 100px;
+	height: 24px;
+	line-height: 24px;
+}
+#zhuti .zhuti_body .left ul li.title{
+	margin-bottom: 3px;
+}
+#zhuti .zhuti_body .left ul li.title a{
+	font-size: 13px;
+	font-weight: bold;
+}
+/*主体右边*/
+#zhuti .zhuti_body .right{
+	width: 1060px;
+	height: 800px;	
+	float: left;
+	overflow: hidden;
+}
+
+#zhuti .zhuti_body .right .right_body_top{
+	width: 1060px;
+	height: 58px;
+	line-height: 58px;
+	background: #fff;
+	margin:0 auto;
+}
+#zhuti .zhuti_body .right .right_body_top span{
+	width: 1060px;
+	height: 58px;
+	padding-left: 30px;
+	background: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	color: #666;
+	margin:0 auto;
+}
+
+#zhuti .zhuti_body .right .right_body_main{
+	width: 1060px;
+	/*height: 374px;*/
+	background: #fff;
+	margin-top: 20px;
+	overflow: hidden;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01{
+	width: 1000px;
+	height: 45px;
+	
+	margin: 20px auto;
+	margin-top: 20px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #666;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 span{
+	padding-left: 40px;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .dingdanxinxi{
+	width: 275px;
+	height: 45px;
+	line-height: 45px;
+	float: left;
+	border-right: 1px dotted #999;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .dingdanxinxi a{
+	padding-right: 10px;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .dingdanxinxi a:hover{
+	border-bottom: 2px solid #f10215;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .changgou{
+	width: 155px;
+	height: 45px;
+	line-height: 45px;
+	float: left;
+	border-right: 1px dotted #999;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .tejia{
+	width: 130px;
+	height: 45px;
+	line-height: 45px;
+	float: left;
+	border-right: 1px dotted #999;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .huishou{
+	width: 130px;
+	height: 45px;
+	line-height: 45px;
+	float: left;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .sousuo{
+	width: 300px;
+	height: 35px;
+	line-height: 45px;
+	float: left;
+	padding-top: 10px;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .sousuo input{
+	display: block;
+	float: left;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .sousuo input[type=text]{
+	margin-left: 20px;
+	width: 170px;
+	height: 21px;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .sousuo input[type=submit]{
+	width: 50px;
+	height: 25px;
+	background: #F6F5F5;
+	border-left:0; 
+	border-right:0;
+	border-bottom: 1px solid #DDDDDD;
+	border-top: 1px solid #DDDDDD;
+	cursor: pointer;
+}
+#zhuti .zhuti_body .right .right_body_main .right_body_main01 .sousuo div{
+	float: left;
+	width: 40px;
+	height: 23px;
+	background: #F6F5F5;
+	line-height: 25px;
+	padding-left: 10px;
+	border: 1px solid #DDDDDD;
+}
+/*商品详情开始*/
+#zhuti .zhuti_body .right .right_body_main .dan{
+	
+	width: 1000px;
+	height: auto;
+	
+	margin: 0px auto;
+	
+}
+#zhuti .zhuti_body .right .right_body_main .dan .dan_top{
+	height: 34px;
+	width: 1000px;
+	font-size: 14px;
+	background: #F6F5F5;
+	text-align: center;
+}
+#zhuti .zhuti_body .right .right_body_main .dan tr.dan_top td.dan_01{
+	width: 570px;
+	padding-left: 20px;
+	text-align: left;
+}
+#zhuti .zhuti_body .right .right_body_main .dan tr.dan_top td.dan_02{
+	width: 115px;
+
+}
+#zhuti .zhuti_body .right .right_body_main .dan tr.dan_top td.dan_03{
+	width: 110px;
+	
+}
+#zhuti .zhuti_body .right .right_body_main .dan tr.dan_top td.dan_04{
+	width: 90px;
+	
+}
+#zhuti .zhuti_body .right .right_body_main .dan tr.dan_top td.dan_05{
+	width: 120px;
+	
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_top{
+	height: 30px;
+	background: #F6F5F5;
+	border: 1px solid #f1f1f1; 
+	font-size: 14px;
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_top td span{
+	padding-right: 30px;
+	padding-left: 20px;
+
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_body{
+	height: 95px;
+	background: #Fff;
+	 font-size: 14px;
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_body>td{
+	border: 1px solid #f1f1f1;
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_body p{
+	color: #999;
+	margin-bottom: 5px;
+	text-align: center;
+	font-size:13px;
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_body p a{
+	color: #000;
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_body td.shopimg div{
+	float: left;
+	width: 300px;
+	height:95px;
+	margin-top:5px;
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_body td.shopimg>div>div{
+	float: left;
+	width: 82px;
+	height:82px;
+	background: url(../image/dingdan/shop-bg.png) no-repeat;
+	margin-left: 20px;
+	margin-right: 10px;
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_body td.shopimg>div a{
+	display: block;
+	float:left;
+    margin-top: 15px;
+    margin-left:15px;
+}
+#zhuti .zhuti_body .right .right_body_main .dan table tr.shoplist_body td.shopimg p{
+	margin-left: 50px;
+	margin-top: 50px;
+	float: left;
+}
+/*商品详情结束*/
+/*分页*/
+#zhuti .zhuti_body .right .right_body_main .fenye{
+	width: 1000px;
+	margin: 0 auto;
+	overflow: hidden;
+} 
+#zhuti .zhuti_body .right .right_body_main .fenye .fenye_body{
+	/*width: 216px;*/
+	float: right;
+} 
+#zhuti .zhuti_body .right .right_body_main .fenye a{
+	display:block;
+	width: 50px;
+	height: 28px;
+	float: left;
+	text-align: center;
+	margin: 10px ;
+	border: 1px solid #999;
+	line-height: 28px;
+}
+#zhuti .zhuti_body .right .right_body_main .fenye .fen_num,
+#zhuti .zhuti_body .right .right_body_main .fenye .fen_left,
+#zhuti .zhuti_body .right .right_body_main .fenye .fen_right{
+	display:block;
+	width: 50px;
+	height: 28px;
+	float: left;
+	text-align: center;
+	margin: 10px ;
+	border: 1px solid #999;
+	line-height: 28px;
+} 
+#zhuti .zhuti_body .right .ad{
+	width: auto;
+	margin: 50px auto;
+}

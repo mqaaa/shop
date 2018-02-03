@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="./include/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+    
+    select{
+        width:200px;
+        height:40px;
+        border:1px solid #ccc;
+        margin-top:10px;
+    }
+</style>
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">表单</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span><?php  echo $title; ?></span></div>
+    <form action="index.php?m=link&a=<?php echo $method; ?>" method="post" enctype="multipart/form-data">
+        <ul class="forminfo">
+       
+               <?php
+                if(isset($_GET['id'])){
+
+                    echo '<input type="hidden" name="id" value="'.$_GET['id'].'"/>';
+                }
+                ?>
+            <li><label>链接名称</label><input name="name" type="text" class="dfinput" value="<?php echo isset($link[0]['name'])?$link[0]['name']:''; ?>" required placeholder="请输入最多13个字" maxlength="13"/><b>*</b><i>请输入最多13个字</i></li>
+               
+    <?php
+
+        if(isset($link)){
+            $wen = $tu = '';
+            if($link[0]['type']==0){
+                $wen = 'selected';
+            }elseif($link[0]['type']==1){
+                $tu = 'selected';
+            }
+
+        }
+
+
+    ?>
+            <li><label>显示类型 </label>
+                <select name="type" id="level" style="position:relative;top:-10px;" required>
+                     <option value="xz" disabled>&nbsp;&nbsp;--请选择分类--</option>
+                     <option value="0" <?php echo $wen; ?>>&nbsp;&nbsp;--文字--</option>
+                     <option value="1" <?php echo $tu; ?>>&nbsp;&nbsp;--图片--</option>
+                    
+                  
+                </select> <b>*</b> 
+                
+            </li>
+
+           
+            <li><label>链接地址</label><input name="url" type="text" class="dfinput" value="<?php echo isset($link[0]['url'])?$link[0]['url']:''; ?>"  required placeholder="请输入链接地址" /><b>*</b><i>请输入链接地址</i></li>
+
+            <li><label>链接图片</label><input name="pic" type="file" class="dfinput"  style="line-height:30px;"/><b>*</b><i>请上传图片进行修改</i></li>
+           
+           <?php
+                $new = $now = '';
+                if(isset($link[0])){
+                        if($link[0]['state']==0){
+                                $new = 'checked';
+                        }else{
+                                $gtime = 'checked';
+                        }
+                }
+
+           ?>
+            <li><label>链接状态</label><cite>
+            <input name="state" type="radio" value="0" <?php echo $new; ?> />显示&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name="state" type="radio" value="1"  <?php echo $now; ?>/>不显示　
+          
+           <b>*</b> </cite></li>
+
+            
+
+            <li><label>添加时间</label><input name="addtime" type="text" class="dfinput" value="<?php echo isset($link[0]['addtime'])?date('Y-m-d H:i:s',$link[0]['addtime']):''; ?>" readonly placeholder="不可选,默认为当前"/></li>
+
+            <input type="hidden" name="img" value="<?php 
+                            if(isset($link[0]['img'])){
+                                $pics = $link[0]['img'];
+                              
+                            }else{
+                                $pics = '';
+                            }
+                             echo $pics;
+                         ?>">
+                
+           <!--  <li><label>文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea></li> -->
+            <li><label>&nbsp;</label><input type="submit" class="btn" value="确认提交"/></li>
+        </ul>
+    </form>
+    
+        <div style="width:200px;overflow:hidden;border:4px double #ccc; position:fixed; right:100px; top:100px; text-align:center; box-shadow:3px 4px 2px #ccc;">
+        <h2 style="font: bold 20px Georgia,serif; padding:10px 0;">链接图片</h2>
+        <div style="margin-top:10px;"> <img src="./uploadimg/links/<?php echo $pics; ?>" alt="请上传商品图片" width="200px"/></div>
+           
+        </div>
+                
+    </div>
+
+
+</body>
+
+</html>

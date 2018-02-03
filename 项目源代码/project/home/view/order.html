@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>订单处理</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="description" content=""/>
+  <link rel="icon" href="./include/images/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./include/css/tasp.css" />
+  <link href="./include/css/orderconfirm.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./include/css/footer.css">
+  <style>
+    #page{width:auto;}
+    #comm-header-inner,#content{width:950px;margin:auto;}
+    #logo{padding-top:26px;padding-bottom:12px;}
+    #header .wrap-box{margin-top:-67px;}
+    #logo .logo{position:relative;overflow:hidden;display:inline-block;width:140px;height:35px;font-size:35px;line-height:35px;color:#f40;}
+    #logo .logo .i{position:absolute;width:140px;height:35px;top:0;left:0;background:url(http://a.tbcdn.cn/tbsp/img/header/logo.png);}
+  </style>
+</head>
+<body data-spm="1">
+  <div id="content" class="grid-c">
+    <form name="addrForm" action="./index.php?m=order&a=getorder" method="post">
+   
+   
+      <div id="address" class="address" style="margin-top: 20px;" data-spm="2">
+        <h3>收货人信息</h3>
+        <ul id="address-list" class="address-list">
+          <li class="J_Addr J_MakePoint clearfix  J_DefaultAddr">
+            <div class="address-info">
+              　联系人：<input type="text" name="linkman" value="" placeholder="请输入联系人" required>　　
+              联系电话：<input type="text" name="phone" value="" placeholder="请输入电话号码" pattern="^\d+$" >　　
+              邮政编码：<input type="text" name="code" placeholder="请输入六位数邮编" pattern="^\d{6}$" max-length="6"><br><br>
+             收货地址：<textarea name="address" id="" cols="100" rows="3" placeholder="请输入收货地址" required ></textarea>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+      <div>
+      <h3 class="dib">确认订单信息</h3>
+      <table cellspacing="0" cellpadding="0" class="order-table" id="J_OrderTable" summary="统一下单订单信息区域">
+        <caption style="display: none">统一下单订单信息区域</caption>
+        <thead>
+          <tr>
+            <th class="s-title">店铺宝贝<hr/></th>
+            <th class="s-price">单价(元)<hr/></th>
+            <th class="s-amount">数量<hr/></th>
+            <th class="s-agio">优惠方式(元)<hr/></th>
+            <th class="s-total">小计(元)<hr/></th>
+          </tr>
+        </thead>
+        <tbody data-spm="3" class="J_Shop" data-tbcbid="0" data-outorderid="47285539868"  data-isb2c="false" data-postMode="2" data-sellerid="1704508670">
+      <?php
+        $total = 0;
+
+        if(!empty($_POST['ids'])){
+            foreach($_POST['ids'] as $k=>$v){
+              $all = $_SESSION['car'][$v]['price']*$_SESSION['car'][$v]['addnum'];
+              $total += $all;
+              $str = <<<EOF
+        <tr class="shop blue-line">
+                <td colspan="3">
+                店铺：
+                <a class="J_ShopName J_MakePoint" href=""target="_blank" title="">
+                  {$_SESSION['car'][$v]['company']}
+                </a>
+                <span class="seller"></span>
+                <td colspan="2" class="promo">
+                  <div>
+                    <ul class="scrolling-promo-hint J_ScrollingPromoHint"></ul>
+                  </div>
+                </td>
+        </tr>
+              <tr class="item" >
+                <td class="s-title">
+                  <a href="#" target="_blank" title="" class="J_MakePoint" >
+                  <img src="../admin/uploadimg/goods/{$_SESSION['car'][$v]['pic']}" class="itempic"><span class="title J_MakePoint"></span></a>
+                  <div>
+                  <span style="color:gray;">卖家承诺24小时内发货</span>
+                  </div>
+                </td>
+                <td class="s-price">
+                  <span class="price">
+                  <em class="style-normal-small-black J_ItemPrice"  >{$_SESSION['car'][$v]['price']}</em>
+                  </span>
+                </td>
+                <td class="s-price">
+                  <span class="price">
+                  <em class="style-normal-small-black J_ItemPrice" >{$_SESSION['car'][$v]['addnum']}</em>
+                  </span>
+                </td>
+                <td class="s-agio">
+                  <div class="J_Promotion promotion" data-point-url="">无优惠</div>
+                </td>
+                <td class="s-total">
+                  <span class="price">
+                  <em class="style-normal-bold-red J_ItemTotal "  >￥{$all}</em>
+                  </span>
+                </td>
+              </tr>
+              <input type="hidden" name="ids[]" value="{$v}">
+
+EOF;
+    echo $str;
+
+            }
+        }
+
+
+      ?>  
+              
+      
+        <tr class="item-service">
+        <td colspan="5" class="servicearea" style="display: none"></td>
+        </tr>
+
+        <tr class="blue-line" style="height: 2px;"><td colspan="5"></td></tr>
+        <tr class="other other-line">
+        <td colspan="5">
+        <ul class="dib-wrap">
+        <li class="dib extra-info">
+
+        <div class="shoppointarea"></div>
+        <div class="farearea">
+        <ul class="dib-wrap J_farearea">
+        <li class="dib title">运送方式：</li>
+        <li class="dib sel" data-point-url="http://log.mmstat.com/jsclick?cache=*&tyxd=wlysfs">
+        <select name="kuaidi" class="J_Fare">
+          <option value="2" selected="selected">快递 包邮 </option>
+        </select>
+        <em tabindex="0" class="J_FareFree" style="display: none">免邮费</em>
+        </li>
+        <li class="dib fee">  <span class='price '>
+        <em class="style-normal-bold-red J_FareSum"  >00.00</em>
+        </span>
+        </li>
+        </ul>
+        </div>
+        <div class="extra-area">
+        <ul class="dib-wrap">
+        <li class="dib title">发货时间：</li>
+        <li class="dib content">卖家承诺订单在买家付款后，72小时内<a href="#">发货</a></li>
+        </ul>
+        </div>
+
+        <div class="servicearea" style="display: none"></div>
+        </li>
+        </ul>
+        </td>
+        </tr>
+        <tr class="shop-total blue-line">
+          <td colspan="5">
+            总合计(含运费)：
+            <span class='price g_price '>
+             <span>&yen; </span><em class="style-middle-bold-red J_ShopTotal" style="font-size:25px;font-weight:bold;color:#EF494D;"><?php echo $total; ?> </em>
+            </span>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+              <div class="order-go" data-spm="4">
+                <div class="J_AddressConfirm address-confirm">
+                  <div class="kd-popup pop-back" style="margin-bottom: 40px;">
+                    <a href="./index.php?m=car&a=show"
+                    class="back J_MakePoint" >返回购物车</a>
+
+                    <!-- 隐藏传总价 -->
+                    <input type="hidden" name="total" value="">
+                    <!-- 隐藏传所购买的商品id -->
+
+                    <input type="hidden" name="goodsid" value="" >
+                    <input type="submit" value="　提交订单　" class="post-order">
+                  </div>
+                </div>
+
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      </div>
+    </form>
+  </div>
+
+    
+  </div>
+</body>
+</html>
+
